@@ -1,72 +1,116 @@
 import React, {useContext} from 'react';
 import {StarwarsContext} from "../context/Context";
-import {Button, Card} from "reactstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {Card, Button} from "react-bootstrap";
+import CharacterIMG from '../assets/characters.jpg'
+import FilmsIMG from '../assets/films.jpg'
+import StarshipIMG from '../assets/starship.jpg'
+import VehiclesIMG from '../assets/vehicles.png'
+import PlanetsIMG from '../assets/planets.jpg'
+import SpeciesIMG from '../assets/speices.jpg'
+import {NavLink} from "react-router-dom";
 
 
 const HomeComp = () => {
+
     return (
         <>
-            <div className="container mt-5">
+            <div className="container">
                 <div className="row">
                     <div className="col-md-4 mb-4">
                         <Card>
-                            <Card.Img
-                                variant="top"
-                                src="https://starwars-visualguide.com/assets/img/placeholder.jpg"
-                            />
                             <Card.Body>
-                                <Card.Title>Card 1</Card.Title>
-                                <Card.Text>
-                                    This is a short description of the first card.
-                                </Card.Text>
-                                <Button variant="primary">Learn More</Button>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                    <div className="col-md-4 mb-4">
-                        <Card>
-                            <Card.Img
-                                variant="top"
-                                src="https://starwars-visualguide.com/assets/img/placeholder.jpg"
-                            />
-                            <Card.Body>
-                                <Card.Title>Card 2</Card.Title>
-                                <Card.Text>
-                                    This is a short description of the second card.
-                                </Card.Text>
-                                <Button variant="primary">Learn More</Button>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                    <div className="col-md-4 mb-4">
-                        <Card>
-                            <Card.Img
-                                variant="top"
-                                src="https://starwars-visualguide.com/assets/img/placeholder.jpg"
-                            />
-                            <Card.Body>
-                                <Card.Title>Card 3</Card.Title>
-                                <Card.Text>
-                                    This is a short description of the third card.
-                                </Card.Text>
-                                <Button variant="primary">Learn More</Button>
+                                <NavLink to={"/people"} activeclassname   ="active">
+                                    <Card.Img
+                                        className={"card-img"}
+                                        variant="top"
+                                        src={CharacterIMG}
+                                    />
+                                    <Card.Title>Characartes</Card.Title>
+                                </NavLink>
+
                             </Card.Body>
                         </Card>
                     </div>
 
-                    <div className="col-md-4 mb-4">
+                    <div className="col-md-4 mb-4 ">
                         <Card>
-                            <Card.Img
-                                variant="top"
-                                src="https://starwars-visualguide.com/assets/img/placeholder.jpg"
-                            />
+
                             <Card.Body>
-                                <Card.Title>Card 4</Card.Title>
-                                <Card.Text>
-                                    This is a short description of the fourth card.
-                                </Card.Text>
-                                <Button variant="primary">Learn More</Button>
+                                <NavLink to={"/films"} activeclassname   ="active">
+                                    <Card.Img
+                                        className={"card-img"}
+                                        variant="top"
+                                        src={FilmsIMG}
+                                    />
+                                    <Card.Title>Films</Card.Title>
+                                </NavLink>
+
+                            </Card.Body>
+                        </Card>
+                    </div>
+
+                    <div className="col-md-4 mb-4 ">
+                        <Card>
+
+                            <Card.Body>
+                                <NavLink to={"starship"} activeclassname   ="active">
+                                    <Card.Img
+                                        className={"card-img"}
+                                        variant="top"
+                                        src={StarshipIMG}
+                                    />
+                                    <Card.Title>Starships</Card.Title>
+                                </NavLink>
+
+                            </Card.Body>
+                        </Card>
+                    </div>
+
+                    <div className="col-md-4 mb-4 ">
+                        <Card>
+                            <Card.Body>
+                                <NavLink to={"/vehicles"} activeclassname   ="active">
+                                    <Card.Img
+                                        className={"card-img"}
+                                        variant="top"
+                                        src={VehiclesIMG}
+                                    />
+                                    <Card.Title>Vehicles</Card.Title>
+                                </NavLink>
+
+                            </Card.Body>
+                        </Card>
+                    </div>
+
+                    <div className="col-md-4 mb-4 ">
+                        <Card>
+                            <Card.Body>
+                                <NavLink to={"/planets"} activeclassname   ="active">
+                                    <Card.Img
+                                        className={"card-img"}
+                                        variant="top"
+                                        src={PlanetsIMG}
+                                    />
+                                    <Card.Title>Planets</Card.Title>
+                                </NavLink>
+
+                            </Card.Body>
+                        </Card>
+                    </div>
+
+                    <div className="col-md-4 mb-4 ">
+                        <Card>
+
+                            <Card.Body>
+                                <NavLink to={"/species"} activeclassname   ="active">
+                                    <Card.Img
+                                        className={"card-img"}
+                                        variant="top"
+                                        src={SpeciesIMG}
+                                    />
+                                    <Card.Title>Species</Card.Title>
+                                </NavLink>
+
                             </Card.Body>
                         </Card>
                     </div>
