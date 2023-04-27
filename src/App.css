@@ -1,52 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
 * {
+    font-family: 'Orbitron', sans-serif;
     color: #dfe1e5;
     background: url("./assets/bg-star3.jpg");
     cursor: none;
     margin-top: 0;
 }
-
-
-/*Header-Navbar */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
+body {
+    /*background: url("./assets/bg-star3.jpg");*/
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
-
-
-
-.logo-container {
-    font-size: 24px;
-    font-weight: bold;
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
-
-.logo-container a {
-    text-decoration: none;
-}
-
-.menu {
-    display: flex;
-}
-
-.menu a {
-    text-decoration: none;
-    color: #ffffff;
-    margin-left: 16px;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.menu a:hover {
-    color: #DB4437;
-}
-
-.menu .active {
-    color: #DB4437;
-}
-
 /* Starwars Card */
-
 .card-container {
     display: flex;
     flex-wrap: wrap;
@@ -68,21 +39,23 @@ header {
 
 
 /* Input Style*/
-
-.input-style input {
+.input-style input  {
+    justify-content: center;
     margin-bottom: 1.4rem;
-    width: 650px;
+    text-align: center;
+    width: 100%;
+    max-width: 650px;
     height: 44px;
     padding: 0 16px;
     border-radius: 24px;
-    background-color: #f1f3f4;
+    background-color: #ffffff;
     font-size: 16px;
     line-height: 24px;
     outline: none;
-    margin-left: 17rem;
+    margin: 0 0 3rem 18rem;
     border: 1px solid #06d1b9;
-    /*border-image:linear-gradient(90deg, #1c2531 0%, #0e7ae6 35%, #06d1b9 80%, #ff0000 100%);*/
 }
+
 
 .input-style input:hover {
     transform: scale(1.05);
@@ -98,25 +71,16 @@ header {
     /*cursor: pointer;*/
 }
 
-/* Mobile Responsive*/
-@media screen and (max-width: 991px) {
-    .-input-style input {
-        width: 300px;
-    }
+.load-more {
+    margin: 2rem 2rem;
 }
 
-
-/*
-Cursor
- */
 
 /* Anahtar kare çerçevesi için ilgili değişkenler */
 :root {
     --main-color: #00FFFF;
     --secondary-color: #FFC107;
 }
-
-
 .cursor {
     width: 15px;
     height: 15px;
@@ -127,11 +91,6 @@ Cursor
     z-index: 9999;
 
 }
-
-/*input, button, a {*/
-/*    pointer-events: auto;*/
-/*}*/
-
 .cursor:before {
     content: "";
     position: absolute;
@@ -241,4 +200,221 @@ Modal
     margin-left:5rem ;
     margin-bottom:2rem
 }
+p > span {
+    color: #ef5268;
+    font-weight: bold;
+}
 
+/*
+Mobil-web header-
+ */
+/*Header-Navbar */
+/*Header-Navbar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+.close-button-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logo-container {
+    justify-content: left;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.menu {
+    display: flex;
+    padding: 20px;
+
+}
+
+.AllNavbar {
+    display: flex;
+    gap: 10px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #ffffff;
+    margin-left: 16px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #DB4437;
+}
+
+.menu .active {
+    color: #DB4437;
+}
+.main-nav {
+    transition: all 0.3s ease;
+}
+
+.main-nav.open {
+    display: block;
+}
+
+.menu {
+margin-top: 2rem;
+    display: flex;
+}
+
+.AllNavbar {
+    display: flex;
+    gap: 10px;
+}
+
+.AllNavbar a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.AllNavbar a:hover {
+    color: #f00;
+}
+
+@media (max-width: 768px) {
+    nav {
+        display: none;
+    }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .main-nav.open {
+        display: block;
+    }
+
+    .menu {
+        display: block;
+    }
+
+    .AllNavbar {
+        display: block;
+        gap: unset;
+    }
+
+    .AllNavbar a {
+        display: block;
+        margin-bottom: 10px;
+    }
+}
+.star-wars-font {
+    font-family: 'Orbitron', sans-serif;
+}
+
+
+/* Mobile Responsive*/
+@media screen and (max-width: 991px) {
+    .input-style input {
+        width: 100%;
+        margin: 0 0 3rem;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+    .card-container {
+        max-width: 100%;
+        padding: 0;
+    }
+    .close-button-centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .menu a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .menu {
+      margin-left: 3rem;
+    }
+    nav{
+        margin-left: 3rem;
+    }
+    header {
+        margin-right: 2.5rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .menu a {
+        text-decoration: none;
+        color: #ffffff;
+        margin-left: 16px;
+        font-size: 40px;
+        font-weight: bold;
+    }
+    .AllNavbar {
+        flex-wrap: wrap;
+    }
+
+    .AllNavbar a {
+        width: 40%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+
+    .logo-container {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-nav {
+        width: 100%;
+    }
+
+    .card-style {
+        width: 100%;
+        margin: 0 0 1rem;
+    }
+
+    .input-style input {
+        margin: 0 0 3rem;
+    }
+    .custom-modal {
+        max-width: 90%;
+        margin-left: 5%;
+    }
+
+
+    .card-img-modal {
+        height: auto;
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 1rem;
+    }
+    .logo-container,
+    .main-nav {
+        display: flex;
+        justify-content: center;
+    }
+}

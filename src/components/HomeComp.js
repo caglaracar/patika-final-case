@@ -14,7 +14,7 @@ const HomeComp = () => {
 
     return (
         <>
-            <div className="container">
+            <div className="container mt-5">
                 <div className="row">
                     <div className="col-md-4 mb-4">
                         <Card>

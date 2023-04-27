@@ -52,8 +52,11 @@ const StarwarsContextProvider = ({children}) => {
         setModalOpen(!modalOpen);
     };
 
+    const [totalResults, setTotalResults] = useState(0);
+    const [loadedResults, setLoadedResults] = useState(0);
+
     return (
-        <StarwarsContext.Provider value={{searchTerm,handleSearchTermChange,toggleModal,modalOpen,setModalOpen}}>
+        <StarwarsContext.Provider value={{searchTerm,handleSearchTermChange,toggleModal,modalOpen,setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults}}>
             {children}
         </StarwarsContext.Provider>
     );

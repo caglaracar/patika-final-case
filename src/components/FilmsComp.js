@@ -50,10 +50,7 @@ const FilmsComp = () => {
 
     return (
         <>
-            <motion.div className={"input-style"}>
-                <motion.input type="text" placeholder="Search Films..." value={searchTerm}
-                              onChange={handleSearchTermChange}/>
-            </motion.div>
+
             <div className="container mt-5">
                 <div className="row">
                     {filterFilms?.map((films, index) => (
@@ -62,18 +59,13 @@ const FilmsComp = () => {
                                 <a  href={"https://www.starwars.com/films"} target={"_blank"}>
 
                                 <Card.Body>
+                                    <Card.Title tag="h5">{films.title}</Card.Title>
+
                                         <Card.Img
                                             className={"card-img"}
                                             variant="top"
                                             src={photos[index].src}
                                         />
-                                        <Card.Title tag="h5">{films.name}</Card.Title>
-                                        <Card.Subtitle tag="h6" className="mb-2 text-muted">
-                                            film: {films.title}
-                                        </Card.Subtitle>
-                                        <Card.Subtitle tag="h6" className="mb-2 text-muted">
-                                            Release Date: {films.release_date}
-                                        </Card.Subtitle>
                                 </Card.Body>
                                 </a>
 

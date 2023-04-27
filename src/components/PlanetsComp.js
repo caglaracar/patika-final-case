@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
-import {getPlanets, getSpecies} from "../services/StarwarsService";
+import { getPlanets} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
 import PlanetIMG from "../assets/planets.jpg";
 
 const PlanetsComp = () => {
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal} = useContext(StarwarsContext)
+    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
     const [selectedPlanet, setSelectedPlanet] = useState(null);
-    const [planet, setPlanet] = useState([]);
+    const [planets, setPlanets] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -16,33 +16,54 @@ const PlanetsComp = () => {
         setSelectedPlanet(people);
         setModalOpen(true);
     };
-    const getAllPlanet = async () => {
-        const allPlanet = await getPlanets();
-        setPlanet(allPlanet.results)
-
-        if (allPlanet.length > 0) {
-            setIsLoading(false)
+    const getAllPlanets = async () => {
+        setIsLoading(true);
+        try {
+            const currentPage = Math.ceil(loadedResults / 10);
+            const data = await getPlanets(currentPage + 1, 10);
+            setPlanets([...planets, ...data.results]);
+            setTotalResults(data.count);
+            setLoadedResults(loadedResults + data.results.length);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
         }
-    }
-    console.log(planet)
+    };
+
+    const getInitialPlanetsData = async () => {
+        setIsLoading(true);
+        try {
+            const data = await getPlanets(1, 10);
+            setPlanets(data.results);
+            setTotalResults(data.count);
+            setLoadedResults(data.results.length);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    const disableLoadMore = loadedResults >= totalResults;
 
     useEffect(() => {
-        getAllPlanet()
+        getInitialPlanetsData();
+        return () => handleSearchTermChange({ target: { value: '' } });
+
     }, []);
-    const filteredPlanets = planet.filter(planet =>
+    const filteredPlanets = planets.filter(planet =>
         planet.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     console.log("planet", filteredPlanets)
     return (
         <>
-            <div>
-                <motion.div className={"input-style "}>
-                    <motion.input type="text" placeholder="Search Planets..." value={searchTerm}
-                                  onChange={handleSearchTermChange}/>
-                </motion.div>
                 <div className="container mt-5">
                     <div className="row">
+                        <motion.div className={"input-style "}>
+                            <motion.input type="text" placeholder="Search Planets..." value={searchTerm}
+                                          onChange={handleSearchTermChange}/>
+                        </motion.div>
                         {filteredPlanets?.map((planet) => (
                             <div key={planet.url} className={"col-md-4 mb-4"}>
                                 <Card className={"card-style-component"}>
@@ -57,41 +78,43 @@ const PlanetsComp = () => {
                                             src={PlanetIMG}
                                         />
                                         <Card.Subtitle tag="h6" className="mb-2 text-muted">
-                                            Climate: {planet.climate}
+                                            <span>Climate :</span> {planet.climate}
                                         </Card.Subtitle>
                                         <Card.Subtitle tag="h6" className="mb-2 text-muted">
-                                            Population: {planet.population}
+                                           <span>Population :</span>  {planet.population}
                                         </Card.Subtitle>
                                         <Card.Subtitle tag="h6" className="mb-2 text-muted">
-                                            Gravity: {planet.gravity}
+                                            <span>Gravity :</span> {planet.gravity}
                                         </Card.Subtitle>
-
                                     </Card.Body>
                                 </Card>
                             </div>
                         ))}
                     </div>
+                    <div className="text-center">
+                        <Button variant="primary" onClick={getAllPlanets} disabled={disableLoadMore || isLoading}>
+                            {isLoading ? 'Loading...' : 'Load More'}
+                        </Button>
+                    </div>
                 </div>
-            </div>
-
             <Modal show={modalOpen} toggle={toggleModal} centered>
                 {selectedPlanet && (
                     <>
-                        <Modal.Header toggle={toggleModal}>
+                        <Modal.Header toggle={toggleModal} className="justify-content-center">
                             <h3>{selectedPlanet.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
                             <img className={"card-img-modal"} src={PlanetIMG} alt={selectedPlanet.name}/>
-                            <p>average_height: {selectedPlanet.climate}</p>
-                            <p>Average Lifespan: {selectedPlanet.diameter}</p>
-                            <p>Classification: {selectedPlanet.gravity}</p>
-                            <p>Designation: {selectedPlanet.orbital_period}</p>
-                            <p>Surface Water: {selectedPlanet.surface_water}</p>
-                            <p>Rotation Period: {selectedPlanet.rotation_period}</p>
+                            <p><span>Climate:</span> {selectedPlanet.climate}</p>
+                            <p><span>Diameter:</span> {selectedPlanet.diameter}</p>
+                            <p><span>Gravity</span> {selectedPlanet.gravity}</p>
+                            <p><span>Orbital Period:</span> {selectedPlanet.orbital_period}</p>
+                            <p><span>Surface Water</span> {selectedPlanet.surface_water}</p>
+                            <p><span>Rotation Per</span> {selectedPlanet.rotation_period}</p>
 
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button onClick={() => {
+                            <Button  className="close-button-centered" onClick={() => {
                                 setModalOpen(false)
                             }}>Close</Button>
 

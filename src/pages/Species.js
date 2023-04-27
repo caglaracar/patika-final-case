@@ -19,7 +19,7 @@ const Species = () => {
         setTimeout(() => {
             setLoading(false);
             animation.destroy();
-        }, 2000);
+        }, 1250);
 
         return () => animation.destroy();
     }, []);

@@ -7,42 +7,72 @@ import VehiclesIMG from "../assets/vehicles.png";
 
 
 const VehiclesComp = () => {
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal} = useContext(StarwarsContext)
-
+    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
     const [selectedVehicles, setSelectedVehicles] = useState(null);
+    const [vehicles, setVehicles] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+
+
+
 
     const handleButtonClick = (vehicles) => {
         setSelectedVehicles(vehicles);
         setModalOpen(true);
     };
 
-    const [vehicles, setVehicles] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    const allGetVehicles = async () => {
-        const allVehicles = await getVehicles();
-        setVehicles(allVehicles.results)
-        if (allVehicles.results.length > 0) {
-            setIsLoading(false)
+    const getVehiclesData = async () => {
+        setIsLoading(true);
+        try {
+            const currentPage = Math.ceil(loadedResults / 10);
+            const data = await getVehicles(currentPage + 1, 10);
+            setVehicles([...vehicles, ...data.results]);
+            setTotalResults(data.count);
+            setLoadedResults(loadedResults + data.results.length);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
         }
-    }
+    };
+
+    const getInitialVehiclesData = async () => {
+        setIsLoading(true);
+        try {
+            const data = await getVehicles(1, 10);
+            setVehicles(data.results);
+            setTotalResults(data.count);
+            setLoadedResults(data.results.length);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    const disableLoadMore = loadedResults >= totalResults;
+
+
     useEffect(() => {
-        allGetVehicles()
+        getInitialVehiclesData();
+        return () => handleSearchTermChange({ target: { value: '' } });
+
     }, []);
 
     const filteredVehicles = vehicles.filter(vehicles =>
         vehicles.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    console.log(vehicles)
 
 
     return (
         <>
-            <motion.div className={"input-style "}>
-                <motion.input type="text" placeholder="Search vehicles..." value={searchTerm}
-                              onChange={handleSearchTermChange}/>
-            </motion.div>
+
             <div className="container mt-5">
                 <div className="row">
+                    <motion.div className={"input-style "}>
+                        <motion.input type="text" placeholder="Search vehicles..." value={searchTerm}
+                                      onChange={handleSearchTermChange}/>
+                    </motion.div>
                     {filteredVehicles?.map((vehicles) => (
                         <div key={vehicles.url} className={"col-md-4 mb-4"}>
                             <Card className={"card-style-component"}>
@@ -58,37 +88,42 @@ const VehiclesComp = () => {
                                         src={VehiclesIMG}
                                     />
                                     <Card.Subtitle tag="h6" className="mb-2 text-muted">
-                                        Model: {vehicles.model}
+                                       <span>Model :</span> {vehicles.model}
                                     </Card.Subtitle>
                                     <Card.Subtitle tag="h6" className="mb-2 text-muted">
-                                        Hyperdrive Rating: {vehicles.hyperdrive_rating}
+                                        <span>Hyperdrive Rating :</span> {vehicles.hyperdrive_rating}
                                     </Card.Subtitle>
                                 </Card.Body>
                             </Card>
                         </div>
                     ))}
                 </div>
+                <div className="text-center">
+                    <Button className={"load-more"} variant="primary" onClick={getVehiclesData} disabled={disableLoadMore || isLoading}>
+                        {isLoading ? 'Loading...' : 'Load More'}
+                    </Button>
+                </div>
             </div>
 
             <Modal show={modalOpen} toggle={toggleModal} centered>
                 {selectedVehicles && (
                     <>
-                        <Modal.Header toggle={toggleModal}>
+                        <Modal.Header toggle={toggleModal} className="justify-content-center">
                             <h3>{selectedVehicles.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
 
                             <img  className={"card-img-modal"}  src={VehiclesIMG} alt={selectedVehicles.name}/>
-                            <p>Model: {selectedVehicles.model}</p>
-                            <p>Hyperdrive Rating: {selectedVehicles.hyperdrive_rating}</p>
-                            <p>Passengers: {selectedVehicles.passengers}</p>
-                            <p>Max Atmosphering Speed: {selectedVehicles.max_atmosphering_speed}</p>
-                            <p>Manufacturer: {selectedVehicles?.manufacturer}</p>
-                            <p>Crew: {selectedVehicles.crew}</p>
-                            <p>Cargo Capacity: {selectedVehicles.cargo_capacity}</p>
+                            <p><span>Model:</span> {selectedVehicles.model}</p>
+                            <p><span>Hyperdrive Rating:</span> {selectedVehicles.hyperdrive_rating}</p>
+                            <p><span>Passengers:</span> {selectedVehicles.passengers}</p>
+                            <p><span>Max Atmosphering Speed:</span> {selectedVehicles.max_atmosphering_speed}</p>
+                            <p><span>Manufacturer:</span> {selectedVehicles?.manufacturer}</p>
+                            <p><span>Crew:</span> {selectedVehicles.crew}</p>
+                            <p><span>Cargo Capacity:</span> {selectedVehicles.cargo_capacity}</p>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button onClick={() => {
+                            <Button  className="close-button-centered" onClick={() => {
                                 setModalOpen(false)
                             }}>Close</Button>
 
