@@ -8,9 +8,9 @@ import Films from "./pages/Films";
 import Planets from "./pages/Planets";
 import Species from "./pages/Species";
 import Starship from "./pages/Starship";
-import Vehicles from "./pages/Vehicles";
 import Home from "./pages/Home";
 import People from "./pages/People";
+import Vehicle from "./pages/Vehicle";
 
 const router = createBrowserRouter([
     {
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
             {path: 'Planets', element: <Planets/>},
             {path: 'species', element: <Species/>},
             {path: 'starship', element: <Starship/>},
-            {path: 'vehicles', element: <Vehicles/>},
+            {path: 'vehicles', element: <Vehicle/>},
         ]
     }
 ]);
