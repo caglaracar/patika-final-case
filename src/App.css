@@ -441,7 +441,7 @@ header {
     }
 
     .card-img-modal {
-        height: 20rem;
+        height: 10rem;
         object-fit: contain;
         width: 100%;
         margin-left: 0;

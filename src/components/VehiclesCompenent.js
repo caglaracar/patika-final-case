@@ -110,12 +110,10 @@ const VehiclesCompenent = () => {
                         <Modal.Body>
 
                             <img  className={"card-img-modal"}  src={VehiclesIMG} alt={selectedVehicles.name}/>
-                            <p><span>Model:</span> {selectedVehicles.model}</p>
                             <p><span>Hyperdrive Rating:</span> {selectedVehicles.hyperdrive_rating}</p>
                             <p><span>Passengers:</span> {selectedVehicles.passengers}</p>
                             <p><span>Max Atmosphering Speed:</span> {selectedVehicles.max_atmosphering_speed}</p>
                             <p><span>Manufacturer:</span> {selectedVehicles?.manufacturer}</p>
-                            <p><span>Crew:</span> {selectedVehicles.crew}</p>
                             <p><span>Cargo Capacity:</span> {selectedVehicles.cargo_capacity}</p>
                         </Modal.Body>
                         <Modal.Footer>
