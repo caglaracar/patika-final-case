@@ -351,7 +351,7 @@ header {
 }
 
 
-/* Mobile Responsive*/
+/* Mobile Responsive */
 @media screen and (max-width: 991px) {
     .input-style input {
         width: 100%;
@@ -362,11 +362,13 @@ header {
         width: 100%;
         display: flex;
         justify-content: center;
+        align-items: center;
     }
 
 }
 
 @media screen and (max-width: 768px) {
+
     .card-container {
         max-width: 100%;
         padding: 0;
@@ -381,15 +383,19 @@ header {
 
     .menu,
     nav {
-        margin-left: 3rem;
+        margin-left: 2rem;
+    }
+
+    body {
+        overflow-x: hidden;
     }
 
     header {
-        margin-right: 2.5rem;
         display: flex;
-        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
     }
-
     .menu a {
         text-decoration: none;
         color: #ffffff;
@@ -408,11 +414,14 @@ header {
         padding: 0.5rem 0;
     }
 
-    .logo-container,
+    .logo-container {
+        margin-right: 3.5rem;
+    }
     .main-nav {
         width: 100%;
         display: flex;
         justify-content: center;
+        align-items: center;
     }
 
     .card-style {
@@ -437,3 +446,4 @@ header {
         margin-bottom: 1rem;
     }
 }
+
