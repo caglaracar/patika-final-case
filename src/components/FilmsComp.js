@@ -1,16 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {StarwarsContext} from "../context/Context";
-import {motion} from "framer-motion";
 import {getFilms} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
-import FilmsIMG from "../assets/films.jpg";
-import FilmsIMG1 from "../assets/starwars1.jpg";
-import FilmsIMG2 from "../assets/starwars2.jpg";
-import FilmsIMG3 from "../assets/starwars3.jpg";
-import FilmsIMG4 from "../assets/starwars4.jpg";
-import FilmsIMG5 from "../assets/starwars5.jpg";
-import FilmsIMG6 from "../assets/starwars6.jpg";
-import {Link} from "@mui/material";
+import FilmsIMG1 from "../assets/films/starwars1.jpg";
+import FilmsIMG2 from "../assets/films/starwars2.jpg";
+import FilmsIMG3 from "../assets/films/starwars3.jpg";
+import FilmsIMG4 from "../assets/films/starwars4.jpg";
+import FilmsIMG5 from "../assets/films/starwars5.jpg";
+import FilmsIMG6 from "../assets/films/starwars6.jpg";
 
 
 const FilmsComp = () => {

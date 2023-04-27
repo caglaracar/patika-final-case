@@ -2,7 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import PeopleComp from '../components/PeopleComp'
 import lottie from "lottie-web";
 import animationData from "../JSON/lightsaberlottie.json";
-import PlanetsComp from "../components/PlanetsComp";
 
 const People = () => {
     const [loading, setLoading] = useState(true);

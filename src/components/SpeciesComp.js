@@ -92,9 +92,12 @@ const SpeciesComp = () => {
                         </div>
                     ))}
                 </div>
-                <Button variant="primary" onClick={getAllSpecies} disabled={disableLoadMore || isLoading}>
-                    {isLoading ? 'Loading...' : 'Load More'}
-                </Button>
+                <div className="text-center">
+                    <Button variant="primary" onClick={getAllSpecies} disabled={disableLoadMore || isLoading}>
+                        {isLoading ? 'Loading...' : 'Load More'}
+                    </Button>
+                </div>
+
             </div>
 
             <Modal show={modalOpen} toggle={toggleModal} centered>

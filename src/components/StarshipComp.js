@@ -10,11 +10,14 @@ const StarshipCard = () => {
     const [selectedStarship, setSelectedStarship] = useState(null);
     const [starships, setStarships] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const handleButtonClick = (starship) => {
+    const [selectedImg,setSelectedImg]=useState("");
+
+    const handleButtonClick = (starship,img) => {
         setSelectedStarship(starship);
+        setSelectedImg(img);
+
         setModalOpen(true);
     };
-    console.log("x",starshipIMGs)
     const getStarshipsData = async () => {
         setIsLoading(true);
         try {
@@ -67,7 +70,7 @@ const StarshipCard = () => {
                         <div key={starship.url} className={"col-md-4 mb-4"}>
                             <Card className={"card-style-component"}>
                                 <Card.Body onClick={() => {
-                                    handleButtonClick(starship)
+                                    handleButtonClick(starship,starshipIMGs[index].img)
                                 }}>
                                     <Card.Title tag="h5">{starship.name}</Card.Title>
                                     <Card.Img className={"card-img"} variant="top" src={starshipIMGs[index].img}/>
@@ -99,7 +102,7 @@ const StarshipCard = () => {
                         <h3>{selectedStarship.name}</h3>
                     </Modal.Header>
                     <Modal.Body>
-                        <img className={"card-img-modal"} src={StarshipIMG} alt={selectedStarship.name}/>
+                        <img className={"card-img-modal"} src={selectedImg} alt={selectedStarship.name}/>
                         <p><span>Model: </span> {selectedStarship.model}</p>
                         <p><span>Hyperdrive Rating:</span> {selectedStarship.hyperdrive_rating}</p>
                         <p><span>Passengers: </span>{selectedStarship.passengers}</p>

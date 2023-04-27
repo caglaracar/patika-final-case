@@ -3,7 +3,7 @@ import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
 import {getPeople} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
-import CharacterIMG from "../assets/characters.jpg";
+import axios from "axios";
 
 
 const PeopleComp = () => {
@@ -11,10 +11,12 @@ const PeopleComp = () => {
     const [selectedPeople, setSelectedPeople] = useState(null);
     const [people, setPeople] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [peopleImg,setPeopleImg]=useState([]);
+    const [selectedImg,setSelectedImg]=useState("");
 
-
-    const handleButtonClick = (people) => {
+    const handleButtonClick = (people,img) => {
         setSelectedPeople(people);
+        setSelectedImg(img);
         setModalOpen(true);
     };
     const getAllPeople = async () => {
@@ -45,19 +47,29 @@ const PeopleComp = () => {
             setIsLoading(false);
         }
     };
+    const getPeopleImg= async ()=>{
+        const {data}=await axios.get("https://akabab.github.io/starwars-api/api/all.json");
+        if(data.length>0){
+            setPeopleImg(data)
+        }
+    }
     const disableLoadMore = loadedResults >= totalResults;
 
     useEffect(() => {
         getInitialPeopleData();
-        return () => handleSearchTermChange({ target: { value: '' } });
+        getPeopleImg();
 
+        return () => {
+            handleSearchTermChange({ target: { value: '' } });
+
+        }
     }, []);
+
+
 
     const filterPeople = people.filter(people =>
         people.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-    console.log("filteredFilms", filterPeople)
     return (
         <>
             <div>
@@ -69,18 +81,18 @@ const PeopleComp = () => {
                             <motion.input type="text" placeholder="Search People..." value={searchTerm}
                                           onChange={handleSearchTermChange}/>
                         </motion.div>
-                        {filterPeople?.map((people) => (
+                        {filterPeople?.map((people,index) => (
                             <div key={people.url} className={"col-md-4 mb-4"}>
                                 <Card className={"card-style-component"}>
                                     <Card.Body onClick={() => {
-                                        handleButtonClick(people)
+                                        handleButtonClick(people,peopleImg[index]?.image)
                                     }}>
                                         <Card.Title tag="h5">{people.name}</Card.Title>
 
                                         <Card.Img
                                             className={"card-img"}
                                             variant="top"
-                                            src={CharacterIMG}
+                                            src={peopleImg[index]?.image}
                                         />
                                         <Card.Subtitle tag="h6" className="mb-2 text-muted">
                                             <span>Birth Year :</span>{people.birth_year}
@@ -108,7 +120,10 @@ const PeopleComp = () => {
                             <h3>{selectedPeople.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
-                            <img className={"card-img-modal"} src={CharacterIMG} alt={selectedPeople.name}/>
+                            {selectedImg?
+                                <img className={"card-img-modal"} src={selectedImg} alt={selectedPeople.name}/>
+                            :""
+                            }
                             <p><span>Birth Year:</span> {selectedPeople.birth_year}</p>
                             <p><span>Eye Color:</span> {selectedPeople.eye_color}</p>
                             <p><span>Gender:</span> {selectedPeople.gender}</p>

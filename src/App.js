@@ -8,7 +8,7 @@ import Starship from "./pages/Starship";
 import Vehicles from "./pages/Vehicles";
 import Home from "./pages/Home";
 import People from "./pages/People";
-// import LightsaberAUD from './assets/LightsaberSound.mp3'
+import LightsaberAUD from './assets/LightsaberSound.mp3'
 import {
     BrowserRouter,
     createBrowserRouter, Route,
@@ -41,8 +41,8 @@ function App() {
         const cursor = cursorRef.current;
         cursor.classList.add('expand');
 
-        // const audio = new Audio(LightsaberAUD);
-        // audio.play();
+        const audio = new Audio(LightsaberAUD);
+        audio.play();
 
         setTimeout(() => {
             cursor.classList.remove('expand');
