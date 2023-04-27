@@ -1,3 +1,4 @@
+// Import required dependencies and hooks
 import React, {useContext, useEffect, useState} from 'react';
 import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
@@ -5,17 +6,24 @@ import {getSpecies} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
 import SpeciesIMG from '../assets/home/species.jpg'
 
+// Creating species component
 const SpeciesCompenent = () => {
+
+    // Getting variables and functions from context
     const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
+
+    // State variables are defined
     const [selectedSpecies, setSelectedSpecies] = useState(null);
     const [species, setSpecies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-
-    const handleButtonClick = (people) => {
-        setSelectedSpecies(people);
+    // Function that will run when the user clicks on a species
+    const handleButtonClick = (species) => {
+        setSelectedSpecies(species);
         setModalOpen(true);
     };
+
+    // Function that calls API to get all species
     const getAllSpecies = async () => {
         setIsLoading(true);
         try {
@@ -31,6 +39,7 @@ const SpeciesCompenent = () => {
         }
     };
 
+    // Function used to initially retrieve species data
     const getInitialSpeciesData = async () => {
         setIsLoading(true);
         try {
@@ -44,19 +53,23 @@ const SpeciesCompenent = () => {
             setIsLoading(false);
         }
     };
-    const disableLoadMore = loadedResults >= totalResults;
-
+    // useEffect that runs startup functions while the component is loading
     useEffect(() => {
         getInitialSpeciesData();
+
+        // Cleanup function to run when removing the component
         return () => handleSearchTermChange({ target: { value: '' } });
 
     }, []);
-    const filteredSpecies = species.filter(people =>
-        people.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    console.log(filteredSpecies)
 
-    console.log("speciessss", filteredSpecies)
+    // Condition used to disable loading more results
+    const disableLoadMore = loadedResults >= totalResults;
+
+    // function used to filter when searching the input field
+    const filteredSpecies = species.filter(species =>
+        species.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <>
 

@@ -1,3 +1,4 @@
+// Import required dependencies and hooks
 import React, {useContext, useEffect, useState} from 'react';
 import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
@@ -5,20 +6,25 @@ import {getPeople} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
 import axios from "axios";
 
-
+// Creating character component
 const CharacterComponent = () => {
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
+    // Getting variables and functions from context
+    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, totalResults, setTotalResults, loadedResults, setLoadedResults} = useContext(StarwarsContext)
+
+    // State variables are defined
     const [selectedPeople, setSelectedPeople] = useState(null);
     const [people, setPeople] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [peopleImg,setPeopleImg]=useState([]);
-    const [selectedImg,setSelectedImg]=useState("");
+    const [peopleImg, setPeopleImg] = useState([]);
+    const [selectedImg, setSelectedImg] = useState("");
 
-    const handleButtonClick = (people,img) => {
+    // Function that will run when the user clicks on a character
+    const handleButtonClick = (people, img) => {
         setSelectedPeople(people);
         setSelectedImg(img);
         setModalOpen(true);
     };
+    // Function that calls API to get all characters
     const getAllPeople = async () => {
         setIsLoading(true);
         try {
@@ -33,7 +39,7 @@ const CharacterComponent = () => {
             setIsLoading(false);
         }
     };
-
+    // Function used to initially retrieve character data
     const getInitialPeopleData = async () => {
         setIsLoading(true);
         try {
@@ -47,45 +53,45 @@ const CharacterComponent = () => {
             setIsLoading(false);
         }
     };
-    const getPeopleImg= async ()=>{
-        const {data}=await axios.get("https://akabab.github.io/starwars-api/api/all.json");
-        if(data.length>0){
+    // Function used to get character images
+    const getPeopleImg = async () => {
+        const {data} = await axios.get("https://akabab.github.io/starwars-api/api/all.json");
+        if (data.length > 0) {
             setPeopleImg(data)
         }
     }
-    const disableLoadMore = loadedResults >= totalResults;
-
+    // useEffect that runs startup functions while the component is loading
     useEffect(() => {
         getInitialPeopleData();
         getPeopleImg();
-
+        // Cleanup function to run when removing the component
         return () => {
-            handleSearchTermChange({ target: { value: '' } });
+            handleSearchTermChange({target: {value: ''}});
 
         }
     }, []);
 
+    // Condition used to disable loading more results
+    const disableLoadMore = loadedResults >= totalResults;
 
-
+    // function used to filter when searching the input field
     const filterPeople = people.filter(people =>
         people.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
     return (
         <>
             <div>
-
                 <div className="container mt-5">
-
                     <div className="row">
                         <motion.div className={"input-style "}>
                             <motion.input type="text" placeholder="Search People..." value={searchTerm}
                                           onChange={handleSearchTermChange}/>
                         </motion.div>
-                        {filterPeople?.map((people,index) => (
+                        {filterPeople?.map((people, index) => (
                             <div key={people.url} className={"col-md-4 mb-4"}>
                                 <Card className={"card-style-component"}>
                                     <Card.Body onClick={() => {
-                                        handleButtonClick(people,peopleImg[index]?.image)
+                                        handleButtonClick(people, peopleImg[index]?.image)
                                     }}>
                                         <Card.Title tag="h5" className="card-title-fixed">{people.name}</Card.Title>
 
@@ -98,7 +104,7 @@ const CharacterComponent = () => {
                                             <span>Birth Year :</span>{people.birth_year}
                                         </Card.Subtitle>
                                         <Card.Subtitle tag="h6" className="mb-4 text-muted">
-                                            <span>Height :</span>  {people.height}
+                                            <span>Height :</span> {people.height}
                                         </Card.Subtitle>
 
                                     </Card.Body>
@@ -113,16 +119,16 @@ const CharacterComponent = () => {
                     </div>
                 </div>
             </div>
-            <Modal show={modalOpen}  centered>
+            <Modal show={modalOpen} centered>
                 {selectedPeople && (
                     <>
-                        <Modal.Header  className="justify-content-center">
+                        <Modal.Header className="justify-content-center">
                             <h3>{selectedPeople.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
-                            {selectedImg?
+                            {selectedImg ?
                                 <img className={"card-img-modal"} src={selectedImg} alt={selectedPeople.name}/>
-                            :""
+                                : ""
                             }
                             <p><span>Birth Year:</span> {selectedPeople.birth_year}</p>
                             <p><span>Eye Color:</span> {selectedPeople.eye_color}</p>
@@ -131,7 +137,7 @@ const CharacterComponent = () => {
                             <p><span>Mass:</span> {selectedPeople.mass}</p>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button  className="close-button-centered" onClick={() => {
+                            <Button className="close-button-centered" onClick={() => {
                                 setModalOpen(false)
                             }}>Close</Button>
 

@@ -1,23 +1,30 @@
+// Import required dependencies and hooks
 import React, {useContext, useEffect, useState} from "react";
 import {StarwarsContext} from "../context/Context";
 import {getStarships} from "../services/StarwarsService";
 import {motion} from "framer-motion";
-import StarshipIMG from '../assets/home/starship.jpg'
 import {Button, Card, Modal} from "react-bootstrap";
 import starshipIMGs from '../JSON/starshipphoto.json';
+
+// Creating character Starship
 const StarshipCard = () => {
+    // Getting variables and functions from context
     const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
+
+    // State variables are defined
     const [selectedStarship, setSelectedStarship] = useState(null);
     const [starships, setStarships] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedImg,setSelectedImg]=useState("");
 
+    // Function that will run when the user clicks on a character
     const handleButtonClick = (starship,img) => {
         setSelectedStarship(starship);
         setSelectedImg(img);
 
         setModalOpen(true);
     };
+    // Function that calls API to get all starships
     const getStarshipsData = async () => {
         setIsLoading(true);
         try {
@@ -32,7 +39,7 @@ const StarshipCard = () => {
             setIsLoading(false);
         }
     };
-
+    // Function used to initially retrieve character data
     const getInitialStarshipsData = async () => {
         setIsLoading(true);
         try {
@@ -46,17 +53,21 @@ const StarshipCard = () => {
             setIsLoading(false);
         }
     };
-    const disableLoadMore = loadedResults >= totalResults;
 
+    // useEffect that runs startup functions while the component is loading
     useEffect(() => {
         getInitialStarshipsData();
+        // Cleanup function to run when removing the component
         return () => handleSearchTermChange({ target: { value: '' } });
     }, []);
 
+    // Condition used to disable loading more results
+    const disableLoadMore = loadedResults >= totalResults;
+
+    // function used to filter when searching the input field
     const filteredStarships = starships.filter(starship =>
         starship.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    console.log(starships   )
     return (
         <>
 

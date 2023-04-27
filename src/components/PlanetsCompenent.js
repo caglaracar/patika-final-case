@@ -1,20 +1,28 @@
+// Import required dependencies and hooks
 import React, {useContext, useEffect, useState} from 'react';
 import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
 import { getPlanets} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
 import PlanetIMG from "../assets/home/planets.jpg";
+// Creating Planet component
 
 const PlanetsCompenent = () => {
+    // Getting variables and functions from context
     const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
+
+    // State variables are defined
     const [selectedPlanet, setSelectedPlanet] = useState(null);
     const [planets, setPlanets] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Function that will run when the user clicks on a planet
     const handleButtonClick = (people) => {
         setSelectedPlanet(people);
         setModalOpen(true);
     };
+
+    // Function that calls API to get all planets
     const getAllPlanets = async () => {
         setIsLoading(true);
         try {
@@ -29,7 +37,7 @@ const PlanetsCompenent = () => {
             setIsLoading(false);
         }
     };
-
+    // Function used to initially retrieve planet data
     const getInitialPlanetsData = async () => {
         setIsLoading(true);
         try {
@@ -43,18 +51,22 @@ const PlanetsCompenent = () => {
             setIsLoading(false);
         }
     };
-    const disableLoadMore = loadedResults >= totalResults;
 
+    // useEffect that runs startup functions while the component is loading
     useEffect(() => {
         getInitialPlanetsData();
         return () => handleSearchTermChange({ target: { value: '' } });
 
     }, []);
+
+    // Condition used to disable loading more results
+    const disableLoadMore = loadedResults >= totalResults;
+
+    // function used to filter when searching the input field
     const filteredPlanets = planets.filter(planet =>
         planet.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    console.log("planet", filteredPlanets)
     return (
         <>
                 <div className="container mt-5">

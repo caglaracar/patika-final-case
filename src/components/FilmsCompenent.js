@@ -1,6 +1,8 @@
+// Import required dependencies and hooks
 import React, {useEffect, useState} from 'react';
 import {getFilms} from "../services/StarwarsService";
 import {Card} from "react-bootstrap";
+
 import FilmsIMG1 from "../assets/films/starwars1.jpg";
 import FilmsIMG2 from "../assets/films/starwars2.jpg";
 import FilmsIMG3 from "../assets/films/starwars3.jpg";
@@ -16,14 +18,17 @@ const photos = [
     {id: 5, src: `${FilmsIMG5}`},
     {id: 6, src: `${FilmsIMG6}`}
 ];
-
+// Creating Film component
 const FilmsCompenent = () => {
+    // State variable is defined
 
     const [filmss, setFilmss] = useState([]);
+    // Function that calls API to get all Films
     const getAllFilms = async () => {
         const allFilms = await getFilms();
         setFilmss(allFilms.results)
     }
+    // useEffect that runs startup functions while the component is loading
     useEffect(() => {
         getAllFilms()
     }, []);

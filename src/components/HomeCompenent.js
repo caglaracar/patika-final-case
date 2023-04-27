@@ -1,3 +1,4 @@
+// Import required dependencies and hooks
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import {Card} from "react-bootstrap";
@@ -18,10 +19,8 @@ const HomeCompenent = () => {
             <div className="container mt-5">
                 <div className="row">
 
-
                     <div className="col-md-4 mb-4 ">
                         <Card>
-
                             <Card.Body>
                                 <NavLink to={"starship"} activeclassname   ="active">
                                     <Card.Title className="card-title-fixed">Starships</Card.Title>
@@ -37,7 +36,6 @@ const HomeCompenent = () => {
 
                     <div className="col-md-4 mb-4 ">
                         <Card>
-
                             <Card.Body>
                                 <NavLink to={"/films"} activeclassname="active">
                                     <Card.Title className="card-title-fixed">Films</Card.Title>
@@ -47,7 +45,6 @@ const HomeCompenent = () => {
                                         src={FilmsIMG}
                                     />
                                 </NavLink>
-
                             </Card.Body>
                         </Card>
                     </div>
@@ -64,7 +61,6 @@ const HomeCompenent = () => {
                                         src={CharacterIMG}
                                     />
                                 </NavLink>
-
                             </Card.Body>
                         </Card>
                     </div>
@@ -81,27 +77,26 @@ const HomeCompenent = () => {
                                         src={VehiclesIMG}
                                     />
                                 </NavLink>
-
                             </Card.Body>
                         </Card>
                     </div>
+
                     <div className="col-md-4 mb-4 ">
                         <Card>
 
                             <Card.Body>
                                 <NavLink to={"/species"} activeclassname   ="active">
                                     <Card.Title className="card-title-fixed">Species</Card.Title>
-
                                     <Card.Img
                                         className={"card-img"}
                                         variant="top"
                                         src={SpeciesIMG}
                                     />
                                 </NavLink>
-
                             </Card.Body>
                         </Card>
                     </div>
+
                     <div className="col-md-4 mb-4 ">
                         <Card>
                             <Card.Body>
@@ -114,11 +109,9 @@ const HomeCompenent = () => {
                                         src={PlanetsIMG}
                                     />
                                 </NavLink>
-
                             </Card.Body>
                         </Card>
                     </div>
-
 
                 </div>
             </div>

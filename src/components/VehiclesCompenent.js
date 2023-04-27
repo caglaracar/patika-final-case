@@ -1,3 +1,4 @@
+// Import required dependencies and hooks
 import React, {useContext, useEffect, useState} from 'react';
 import {motion} from "framer-motion";
 import {StarwarsContext} from "../context/Context";
@@ -5,18 +6,24 @@ import {Card, Button, Modal} from "react-bootstrap";
 import {getVehicles} from "../services/StarwarsService";
 import VehiclesIMG from "../assets/home/vehicles.png";
 
-
+// Creating vehicles component
 const VehiclesCompenent = () => {
+
+    // Getting variables and functions from context
     const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
+
+    // State variables are defined
     const [selectedVehicles, setSelectedVehicles] = useState(null);
     const [vehicles, setVehicles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Function that will run when the user clicks on a character
     const handleButtonClick = (vehicles) => {
         setSelectedVehicles(vehicles);
         setModalOpen(true);
     };
 
+    // Function that calls API to get all vehicles
     const getVehiclesData = async () => {
         setIsLoading(true);
         try {
@@ -32,6 +39,7 @@ const VehiclesCompenent = () => {
         }
     };
 
+    // Function used to initially retrieve character data
     const getInitialVehiclesData = async () => {
         setIsLoading(true);
         try {
@@ -45,21 +53,21 @@ const VehiclesCompenent = () => {
             setIsLoading(false);
         }
     };
-    const disableLoadMore = loadedResults >= totalResults;
 
-
+    // useEffect that runs startup functions while the component is loading
     useEffect(() => {
         getInitialVehiclesData();
         return () => handleSearchTermChange({ target: { value: '' } });
 
     }, []);
 
+    // Condition used to disable loading more results
+    const disableLoadMore = loadedResults >= totalResults;
+
+    // function used to filter when searching the input field
     const filteredVehicles = vehicles.filter(vehicles =>
         vehicles.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    console.log(vehicles)
-
-
     return (
         <>
 
