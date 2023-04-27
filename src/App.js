@@ -1,4 +1,5 @@
-import React, {useEffect, useRef, useState} from "react";
+// Import required dependencies, hooks, and components
+import React, {useEffect, useRef} from "react";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 import './App.css';
@@ -12,6 +13,7 @@ import Home from "./pages/Home";
 import People from "./pages/People";
 import Vehicle from "./pages/Vehicle";
 
+// Create the router object with route configurations
 const router = createBrowserRouter([
     {
         path: '/',
@@ -29,8 +31,12 @@ const router = createBrowserRouter([
     }
 ]);
 
+// Define the App functional component
 function App() {
+    // Initialize a ref for the cursor
     const cursorRef = useRef(null);
+
+    // Define the expandCursor function to expand and shrink the custom cursor
     const expandCursor = () => {
         const cursor = cursorRef.current;
         cursor.classList.add('expand');
@@ -39,6 +45,7 @@ function App() {
         }, 500);
     };
 
+    // Use the useEffect hook to add event listeners for custom cursor behavior
     useEffect(() => {
         const cursor = cursorRef.current;
 
@@ -50,13 +57,14 @@ function App() {
         document.addEventListener('mousemove', moveCursor);
         document.addEventListener('click', expandCursor);
 
+        // Clean up event listeners when the component is unmounted
         return () => {
             document.removeEventListener('mousemove', moveCursor);
             document.removeEventListener('click', expandCursor);
         };
     }, []);
 
-
+    // Render the component
     return (
         <>
             <StarwarsContextProvider>
@@ -67,4 +75,5 @@ function App() {
     );
 }
 
+// Export the App component
 export default App;
