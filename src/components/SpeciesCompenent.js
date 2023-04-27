@@ -1,12 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
-import {    getSpecies} from "../services/StarwarsService";
+import {getSpecies} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
 import SpeciesIMG from "../assets/speices.jpg";
 
-const SpeciesComp = () => {
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
+const SpeciesCompenent = () => {
+    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
     const [selectedSpecies, setSelectedSpecies] = useState(null);
     const [species, setSpecies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -100,10 +100,10 @@ const SpeciesComp = () => {
 
             </div>
 
-            <Modal show={modalOpen} toggle={toggleModal} centered>
+            <Modal show={modalOpen} centered>
                 {selectedSpecies && (
                     <>
-                        <Modal.Header toggle={toggleModal} className="justify-content-center">
+                        <Modal.Header className="justify-content-center">
                             <h3>{selectedSpecies.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
@@ -127,4 +127,4 @@ const SpeciesComp = () => {
     );
 };
 
-export default SpeciesComp;
+export default SpeciesCompenent;

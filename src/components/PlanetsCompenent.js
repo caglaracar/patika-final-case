@@ -5,12 +5,11 @@ import { getPlanets} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
 import PlanetIMG from "../assets/planets.jpg";
 
-const PlanetsComp = () => {
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
+const PlanetsCompenent = () => {
+    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
     const [selectedPlanet, setSelectedPlanet] = useState(null);
     const [planets, setPlanets] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
 
     const handleButtonClick = (people) => {
         setSelectedPlanet(people);
@@ -97,10 +96,10 @@ const PlanetsComp = () => {
                         </Button>
                     </div>
                 </div>
-            <Modal show={modalOpen} toggle={toggleModal} centered>
+            <Modal show={modalOpen} centered>
                 {selectedPlanet && (
                     <>
-                        <Modal.Header toggle={toggleModal} className="justify-content-center">
+                        <Modal.Header className="justify-content-center">
                             <h3>{selectedPlanet.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
@@ -127,4 +126,4 @@ const PlanetsComp = () => {
     );
 };
 
-export default PlanetsComp;
+export default PlanetsCompenent;

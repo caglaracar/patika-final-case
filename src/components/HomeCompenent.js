@@ -10,22 +10,25 @@ import SpeciesIMG from '../assets/speices.jpg'
 import {NavLink} from "react-router-dom";
 
 
-const HomeComp = () => {
+const HomeCompenent = () => {
 
     return (
         <>
             <div className="container mt-5">
                 <div className="row">
-                    <div className="col-md-4 mb-4">
+
+
+                    <div className="col-md-4 mb-4 ">
                         <Card>
+
                             <Card.Body>
-                                <NavLink to={"/people"} activeclassname   ="active">
+                                <NavLink to={"starship"} activeclassname   ="active">
                                     <Card.Img
                                         className={"card-img"}
                                         variant="top"
-                                        src={CharacterIMG}
+                                        src={StarshipIMG}
                                     />
-                                    <Card.Title>Characartes</Card.Title>
+                                    <Card.Title>Starships</Card.Title>
                                 </NavLink>
 
                             </Card.Body>
@@ -49,17 +52,16 @@ const HomeComp = () => {
                         </Card>
                     </div>
 
-                    <div className="col-md-4 mb-4 ">
+                    <div className="col-md-4 mb-4">
                         <Card>
-
                             <Card.Body>
-                                <NavLink to={"starship"} activeclassname   ="active">
+                                <NavLink to={"/people"} activeclassname   ="active">
                                     <Card.Img
                                         className={"card-img"}
                                         variant="top"
-                                        src={StarshipIMG}
+                                        src={CharacterIMG}
                                     />
-                                    <Card.Title>Starships</Card.Title>
+                                    <Card.Title>CHARACTERS</Card.Title>
                                 </NavLink>
 
                             </Card.Body>
@@ -81,23 +83,6 @@ const HomeComp = () => {
                             </Card.Body>
                         </Card>
                     </div>
-
-                    <div className="col-md-4 mb-4 ">
-                        <Card>
-                            <Card.Body>
-                                <NavLink to={"/planets"} activeclassname   ="active">
-                                    <Card.Img
-                                        className={"card-img"}
-                                        variant="top"
-                                        src={PlanetsIMG}
-                                    />
-                                    <Card.Title>Planets</Card.Title>
-                                </NavLink>
-
-                            </Card.Body>
-                        </Card>
-                    </div>
-
                     <div className="col-md-4 mb-4 ">
                         <Card>
 
@@ -114,6 +99,23 @@ const HomeComp = () => {
                             </Card.Body>
                         </Card>
                     </div>
+                    <div className="col-md-4 mb-4 ">
+                        <Card>
+                            <Card.Body>
+                                <NavLink to={"/planets"} activeclassname   ="active">
+                                    <Card.Img
+                                        className={"card-img"}
+                                        variant="top"
+                                        src={PlanetsIMG}
+                                    />
+                                    <Card.Title>Planets</Card.Title>
+                                </NavLink>
+
+                            </Card.Body>
+                        </Card>
+                    </div>
+
+
                 </div>
             </div>
         </>
@@ -121,4 +123,4 @@ const HomeComp = () => {
     );
 };
 
-export default HomeComp;
+export default HomeCompenent;

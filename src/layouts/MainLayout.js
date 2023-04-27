@@ -1,21 +1,21 @@
 import { NavLink, Outlet } from "react-router-dom";
 import wars from "../assets/logo.svg";
-import React, { useState } from "react";
+import React from "react";
+
 
 export const MainLayout = () => {
-
     return (
         <>
             <header>
-
-
                 <nav className={"nav"}>
+
                     <div className="logo-container">
                         <NavLink to={"/"}  style={{ textAlign: "center" }}>
                             <img src={wars} alt="" />
                         </NavLink>
                     </div>
                     <div className="menu">
+
                         <div>
                             <NavLink to={"/"}  activeclassname="active" className="star-wars-font">
                                 Home
@@ -30,7 +30,7 @@ export const MainLayout = () => {
                                 Films
                             </NavLink>
                             <NavLink to={"/people"} className="star-wars-font" activeclassname="active">
-                                People
+                                Characters
                             </NavLink>
                             <NavLink to={"/vehicles"} className="star-wars-font"  activeclassname="active">
                                 Vehicles

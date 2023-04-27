@@ -6,7 +6,7 @@ import {Card, Button, Modal} from "react-bootstrap";
 import axios from "axios";
 
 
-const PeopleComp = () => {
+const CharacterComponent = () => {
     const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
     const [selectedPeople, setSelectedPeople] = useState(null);
     const [people, setPeople] = useState([]);
@@ -113,10 +113,10 @@ const PeopleComp = () => {
                     </div>
                 </div>
             </div>
-            <Modal show={modalOpen} toggle={toggleModal} centered>
+            <Modal show={modalOpen}  centered>
                 {selectedPeople && (
                     <>
-                        <Modal.Header toggle={toggleModal} className="justify-content-center">
+                        <Modal.Header  className="justify-content-center">
                             <h3>{selectedPeople.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
@@ -144,4 +144,4 @@ const PeopleComp = () => {
     );
 };
 
-export default PeopleComp;
+export default CharacterComponent;

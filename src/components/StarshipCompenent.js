@@ -6,7 +6,7 @@ import StarshipIMG from '../assets/starship.jpg'
 import {Button, Card, Modal} from "react-bootstrap";
 import starshipIMGs from '../JSON/starshipphoto.json';
 const StarshipCard = () => {
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
+    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
     const [selectedStarship, setSelectedStarship] = useState(null);
     const [starships, setStarships] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -92,13 +92,8 @@ const StarshipCard = () => {
                 </div>
             </div>
             {selectedStarship && (
-                <Modal
-                    show={modalOpen}
-                    toggle={toggleModal}
-                    centered
-                    className={"custom-modal"}
-                >
-                    <Modal.Header toggle={toggleModal} className="justify-content-center">
+                <Modal show={modalOpen} centered>
+                    <Modal.Header  className="justify-content-center">
                         <h3>{selectedStarship.name}</h3>
                     </Modal.Header>
                     <Modal.Body>

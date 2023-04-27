@@ -6,7 +6,7 @@ import {getVehicles} from "../services/StarwarsService";
 import VehiclesIMG from "../assets/vehicles.png";
 
 
-const VehiclesComp = () => {
+const VehiclesCompenent = () => {
     const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
     const [selectedVehicles, setSelectedVehicles] = useState(null);
     const [vehicles, setVehicles] = useState([]);
@@ -105,10 +105,10 @@ const VehiclesComp = () => {
                 </div>
             </div>
 
-            <Modal show={modalOpen} toggle={toggleModal} centered>
+            <Modal show={modalOpen} centered>
                 {selectedVehicles && (
                     <>
-                        <Modal.Header toggle={toggleModal} className="justify-content-center">
+                        <Modal.Header className="justify-content-center">
                             <h3>{selectedVehicles.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
@@ -136,4 +136,4 @@ const VehiclesComp = () => {
     );
 };
 
-export default VehiclesComp;
+export default VehiclesCompenent;

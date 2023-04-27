@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import StarshipComp from "../components/StarshipComp";
+import StarshipComp from "../components/StarshipCompenent";
 import lottie from "lottie-web";
 import animationData from "../JSON/lightsaberlottie.json";
 

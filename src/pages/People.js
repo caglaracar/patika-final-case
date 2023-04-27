@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import PeopleComp from '../components/PeopleComp'
+import CharacterComponent from '../components/CharacterComponent'
 import lottie from "lottie-web";
 import animationData from "../JSON/lightsaberlottie.json";
 
@@ -33,7 +33,7 @@ const People = () => {
                     <div ref={animationContainer} style={{ width: '20rem', height: '30rem' }}></div>
                 </div>
             ) : (
-                <PeopleComp/>
+                <CharacterComponent/>
             )}
         </>
     );

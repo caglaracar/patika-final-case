@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import FilmsComp from '../components/FilmsComp';
+import FilmsCompenent from '../components/FilmsCompenent';
 import lottie from 'lottie-web';
 import animationData from '../JSON/lightsaberlottie.json';
 
@@ -31,7 +31,7 @@ const Films = () => {
                     <div ref={animationContainer} style={{ width: '20rem', height: '30rem' }}></div>
                 </div>
             ) : (
-                <FilmsComp />
+                <FilmsCompenent />
             )}
         </>
     );

@@ -1,5 +1,8 @@
+import React, {useEffect, useRef, useState} from "react";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+
 import './App.css';
-import StarwarsContextProvider from "./context/Context";
+import StarwarsContextProvider from './context/Context';
 import {MainLayout} from "./layouts/MainLayout";
 import Films from "./pages/Films";
 import Planets from "./pages/Planets";
@@ -8,14 +11,6 @@ import Starship from "./pages/Starship";
 import Vehicles from "./pages/Vehicles";
 import Home from "./pages/Home";
 import People from "./pages/People";
-import LightsaberAUD from './assets/LightsaberSound.mp3'
-import {
-    BrowserRouter,
-    createBrowserRouter, Route,
-    RouterProvider, Routes,
-} from "react-router-dom";
-import {useEffect, useRef} from "react";
-
 
 const router = createBrowserRouter([
     {
@@ -36,18 +31,13 @@ const router = createBrowserRouter([
 
 function App() {
     const cursorRef = useRef(null);
-
-    function expandCursor() {
+    const expandCursor = () => {
         const cursor = cursorRef.current;
         cursor.classList.add('expand');
-
-        const audio = new Audio(LightsaberAUD);
-        audio.play();
-
         setTimeout(() => {
             cursor.classList.remove('expand');
         }, 500);
-    }
+    };
 
     useEffect(() => {
         const cursor = cursorRef.current;
@@ -66,6 +56,7 @@ function App() {
         };
     }, []);
 
+
     return (
         <>
             <StarwarsContextProvider>
@@ -73,7 +64,6 @@ function App() {
                 <RouterProvider router={router}/>
             </StarwarsContextProvider>
         </>
-
     );
 }
 

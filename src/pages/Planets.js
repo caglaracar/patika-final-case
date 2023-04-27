@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
-import PlanetsComp from "../components/PlanetsComp";
+import PlanetsCompenent from "../components/PlanetsCompenent";
 import lottie from "lottie-web";
 import animationData from "../JSON/lightsaberlottie.json";
-import FilmsComp from "../components/FilmsComp";
+import FilmsCompenent from "../components/FilmsCompenent";
 
 const Planets = () => {
     const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ const Planets = () => {
                     <div ref={animationContainer} style={{ width: '20rem', height: '30rem' }}></div>
                 </div>
             ) : (
-                <PlanetsComp/>
+                <PlanetsCompenent/>
             )}
         </>
     );
