@@ -369,6 +369,8 @@ header {
 
 @media screen and (max-width: 768px) {
 
+
+
     .card-container {
         max-width: 100%;
         padding: 0;
@@ -383,7 +385,7 @@ header {
 
     .menu,
     nav {
-        margin-left: 2rem;
+        margin-left: 2.4rem;
     }
 
     body {
