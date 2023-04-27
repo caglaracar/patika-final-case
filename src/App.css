@@ -192,7 +192,22 @@ CARD
     width: 100%;
     margin-left: 0;
     margin-bottom: 1rem;
+
 }
+
+.card-img-fixed {
+    height: 15rem;
+    object-fit: contain;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 2rem;
+}
+.card-title-fixed {
+    margin-bottom: 1.5rem;
+    min-height: 3rem;
+    max-height: 3rem;
+}
+
 
 .card-title {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);

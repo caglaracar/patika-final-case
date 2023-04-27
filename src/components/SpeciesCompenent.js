@@ -3,7 +3,7 @@ import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
 import {getSpecies} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
-import SpeciesIMG from "../assets/home/speices.jpg";
+import SpeciesIMG from '../assets/home/species.jpg'
 
 const SpeciesCompenent = () => {
     const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
@@ -73,17 +73,17 @@ const SpeciesCompenent = () => {
                                 <Card.Body onClick={() => {
                                     handleButtonClick(specie)
                                 }}>
-                                    <Card.Title tag="h5">{specie.name}</Card.Title>
+                                    <Card.Title tag="h5" className="card-title-fixed">{specie.name}</Card.Title>
 
                                     <Card.Img
-                                        className={"card-img"}
+                                        className={"card-img card-img-fixed"}
                                         variant="top"
                                         src={SpeciesIMG}
                                     />
-                                    <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                    <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                       <span>Classification :</span>   {specie.classification}
                                     </Card.Subtitle>
-                                    <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                    <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                         <span>Language :</span>  {specie.language}
                                     </Card.Subtitle>
 

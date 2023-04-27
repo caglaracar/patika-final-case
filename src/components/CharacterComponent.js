@@ -87,17 +87,17 @@ const CharacterComponent = () => {
                                     <Card.Body onClick={() => {
                                         handleButtonClick(people,peopleImg[index]?.image)
                                     }}>
-                                        <Card.Title tag="h5">{people.name}</Card.Title>
+                                        <Card.Title tag="h5" className="card-title-fixed">{people.name}</Card.Title>
 
                                         <Card.Img
-                                            className={"card-img"}
+                                            className={"card-img card-img-fixed"}
                                             variant="top"
                                             src={peopleImg[index]?.image}
                                         />
-                                        <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                        <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                             <span>Birth Year :</span>{people.birth_year}
                                         </Card.Subtitle>
-                                        <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                        <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                             <span>Height :</span>  {people.height}
                                         </Card.Subtitle>
 

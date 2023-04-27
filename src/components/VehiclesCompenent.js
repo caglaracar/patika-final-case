@@ -72,21 +72,20 @@ const VehiclesCompenent = () => {
                     {filteredVehicles?.map((vehicles) => (
                         <div key={vehicles.url} className={"col-md-4 mb-4"}>
                             <Card className={"card-style-component"}>
-
                                 <Card.Body onClick={() => {
                                     handleButtonClick(vehicles)
                                 }}>
-                                    <Card.Title tag="h5">{vehicles.name}</Card.Title>
+                                    <Card.Title tag="h5" className="card-title-fixed">{vehicles.name}</Card.Title>
 
                                     <Card.Img
-                                        className={"card-img"}
+                                        className={"card-img card-img-fixed"}
                                         variant="top"
                                         src={VehiclesIMG}
                                     />
-                                    <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                    <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                        <span>Model :</span> {vehicles.model}
                                     </Card.Subtitle>
-                                    <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                    <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                         <span>Hyperdrive Rating :</span> {vehicles.hyperdrive_rating}
                                     </Card.Subtitle>
                                 </Card.Body>

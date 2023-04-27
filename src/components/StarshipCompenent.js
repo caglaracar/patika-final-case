@@ -72,12 +72,12 @@ const StarshipCard = () => {
                                 <Card.Body onClick={() => {
                                     handleButtonClick(starship,starshipIMGs[index].img)
                                 }}>
-                                    <Card.Title tag="h5">{starship.name}</Card.Title>
-                                    <Card.Img className={"card-img"} variant="top" src={starshipIMGs[index].img}/>
-                                    <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                    <Card.Title tag="h5" className="card-title-fixed">{starship.name}</Card.Title>
+                                    <Card.Img className={"card-img card-img-fixed"} variant="top" src={starshipIMGs[index].img}/>
+                                    <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                         <span>Model :</span> {starship.model}
                                     </Card.Subtitle>
-                                    <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                    <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                         <span>Hyperdrive Rating :</span> {starship.hyperdrive_rating}
                                     </Card.Subtitle>
                                 </Card.Body>

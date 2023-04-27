@@ -37,10 +37,10 @@ const FilmsCompenent = () => {
                             <Card className={"card-style-component"}>
                                 <a  href={"https://www.starwars.com/films"} target={"_blank"}>
                                 <Card.Body>
-                                    <Card.Title tag="h5">{films.title}</Card.Title>
+                                    <Card.Title tag="h5" className="card-title-fixed">{films.title} </Card.Title>
 
                                         <Card.Img
-                                            className={"card-img"}
+                                            className={"card-img card-img-fixed"}
                                             variant="top"
                                             src={photos[index].src}
                                         />

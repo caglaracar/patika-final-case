@@ -7,7 +7,7 @@ import FilmsIMG from '../assets/home/films.jpg'
 import StarshipIMG from '../assets/home/starship.jpg'
 import VehiclesIMG from '../assets/home/vehicles.png'
 import PlanetsIMG from '../assets/home/planets.jpg'
-import SpeciesIMG from '../assets/home/speices.jpg'
+import SpeciesIMG from '../assets/home/species.jpg'
 
 
 
@@ -24,14 +24,13 @@ const HomeCompenent = () => {
 
                             <Card.Body>
                                 <NavLink to={"starship"} activeclassname   ="active">
+                                    <Card.Title className="card-title-fixed">Starships</Card.Title>
                                     <Card.Img
                                         className={"card-img"}
                                         variant="top"
                                         src={StarshipIMG}
                                     />
-                                    <Card.Title>Starships</Card.Title>
                                 </NavLink>
-
                             </Card.Body>
                         </Card>
                     </div>
@@ -40,13 +39,13 @@ const HomeCompenent = () => {
                         <Card>
 
                             <Card.Body>
-                                <NavLink to={"/films"} activeclassname   ="active">
+                                <NavLink to={"/films"} activeclassname="active">
+                                    <Card.Title className="card-title-fixed">Films</Card.Title>
                                     <Card.Img
                                         className={"card-img"}
                                         variant="top"
                                         src={FilmsIMG}
                                     />
-                                    <Card.Title>Films</Card.Title>
                                 </NavLink>
 
                             </Card.Body>
@@ -57,12 +56,13 @@ const HomeCompenent = () => {
                         <Card>
                             <Card.Body>
                                 <NavLink to={"/people"} activeclassname   ="active">
+                                    <Card.Title className="card-title-fixed">CHARACTERS</Card.Title>
+
                                     <Card.Img
                                         className={"card-img"}
                                         variant="top"
                                         src={CharacterIMG}
                                     />
-                                    <Card.Title>CHARACTERS</Card.Title>
                                 </NavLink>
 
                             </Card.Body>
@@ -73,12 +73,13 @@ const HomeCompenent = () => {
                         <Card>
                             <Card.Body>
                                 <NavLink to={"/vehicles"} activeclassname   ="active">
+                                    <Card.Title className="card-title-fixed">Vehicles</Card.Title>
+
                                     <Card.Img
                                         className={"card-img"}
                                         variant="top"
                                         src={VehiclesIMG}
                                     />
-                                    <Card.Title>Vehicles</Card.Title>
                                 </NavLink>
 
                             </Card.Body>
@@ -89,12 +90,13 @@ const HomeCompenent = () => {
 
                             <Card.Body>
                                 <NavLink to={"/species"} activeclassname   ="active">
+                                    <Card.Title className="card-title-fixed">Species</Card.Title>
+
                                     <Card.Img
                                         className={"card-img"}
                                         variant="top"
                                         src={SpeciesIMG}
                                     />
-                                    <Card.Title>Species</Card.Title>
                                 </NavLink>
 
                             </Card.Body>
@@ -104,12 +106,13 @@ const HomeCompenent = () => {
                         <Card>
                             <Card.Body>
                                 <NavLink to={"/planets"} activeclassname   ="active">
+                                    <Card.Title className="card-title-fixed">Planets</Card.Title>
+
                                     <Card.Img
                                         className={"card-img"}
                                         variant="top"
                                         src={PlanetsIMG}
                                     />
-                                    <Card.Title>Planets</Card.Title>
                                 </NavLink>
 
                             </Card.Body>

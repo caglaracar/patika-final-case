@@ -65,24 +65,24 @@ const PlanetsCompenent = () => {
                         </motion.div>
                         {filteredPlanets?.map((planet) => (
                             <div key={planet.url} className={"col-md-4 mb-4"}>
-                                <Card className={"card-style-component"}>
+                                <Card className={"card-style-component"} >
                                     <Card.Body onClick={() => {
                                         handleButtonClick(planet)
                                     }}>
-                                        <Card.Title tag="h5">{planet.name}</Card.Title>
+                                        <Card.Title tag="h5">{planet.name} className="card-title-fixed"</Card.Title>
 
                                         <Card.Img
-                                            className={"card-img"}
+                                            className={"card-img card-img-fixed"}
                                             variant="top"
                                             src={PlanetIMG}
                                         />
-                                        <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                        <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                             <span>Climate :</span> {planet.climate}
                                         </Card.Subtitle>
-                                        <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                        <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                            <span>Population :</span>  {planet.population}
                                         </Card.Subtitle>
-                                        <Card.Subtitle tag="h6" className="mb-2 text-muted">
+                                        <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                             <span>Gravity :</span> {planet.gravity}
                                         </Card.Subtitle>
                                     </Card.Body>
