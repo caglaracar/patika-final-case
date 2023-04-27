@@ -11,12 +11,10 @@ const StarwarsContextProvider = ({children}) => {
     const handleSearchTermChange = event => {
         setSearchTerm(event.target.value);
     };
-    const toggleModal = () => {
-        setModalOpen(!modalOpen);
-    };
+
 
     return (
-        <StarwarsContext.Provider value={{handleSearchTermChange,toggleModal,modalOpen,setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults,searchTerm}}>
+        <StarwarsContext.Provider value={{handleSearchTermChange,modalOpen,setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults,searchTerm}}>
             {children}
         </StarwarsContext.Provider>
     );

@@ -3,7 +3,7 @@ import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
 import {getSpecies} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
-import SpeciesIMG from "../assets/speices.jpg";
+import SpeciesIMG from "../assets/home/speices.jpg";
 
 const SpeciesCompenent = () => {
     const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)

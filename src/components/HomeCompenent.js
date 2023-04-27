@@ -1,13 +1,14 @@
-import React, {useContext} from 'react';
-import {StarwarsContext} from "../context/Context";
-import {Card, Button} from "react-bootstrap";
-import CharacterIMG from '../assets/characters.jpg'
-import FilmsIMG from '../assets/films.jpg'
-import StarshipIMG from '../assets/starship.jpg'
-import VehiclesIMG from '../assets/vehicles.png'
-import PlanetsIMG from '../assets/planets.jpg'
-import SpeciesIMG from '../assets/speices.jpg'
+import React from 'react';
 import {NavLink} from "react-router-dom";
+import {Card} from "react-bootstrap";
+
+import CharacterIMG from '../assets/home/characters.jpg'
+import FilmsIMG from '../assets/home/films.jpg'
+import StarshipIMG from '../assets/home/starship.jpg'
+import VehiclesIMG from '../assets/home/vehicles.png'
+import PlanetsIMG from '../assets/home/planets.jpg'
+import SpeciesIMG from '../assets/home/speices.jpg'
+
 
 
 const HomeCompenent = () => {

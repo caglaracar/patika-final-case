@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {StarwarsContext} from "../context/Context";
 import {getStarships} from "../services/StarwarsService";
 import {motion} from "framer-motion";
-import StarshipIMG from '../assets/starship.jpg'
+import StarshipIMG from '../assets/home/starship.jpg'
 import {Button, Card, Modal} from "react-bootstrap";
 import starshipIMGs from '../JSON/starshipphoto.json';
 const StarshipCard = () => {

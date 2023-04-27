@@ -3,7 +3,7 @@ import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
 import { getPlanets} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
-import PlanetIMG from "../assets/planets.jpg";
+import PlanetIMG from "../assets/home/planets.jpg";
 
 const PlanetsCompenent = () => {
     const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)

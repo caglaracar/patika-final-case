@@ -3,18 +3,14 @@ import {motion} from "framer-motion";
 import {StarwarsContext} from "../context/Context";
 import {Card, Button, Modal} from "react-bootstrap";
 import {getVehicles} from "../services/StarwarsService";
-import VehiclesIMG from "../assets/vehicles.png";
+import VehiclesIMG from "../assets/home/vehicles.png";
 
 
 const VehiclesCompenent = () => {
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, toggleModal,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
+    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
     const [selectedVehicles, setSelectedVehicles] = useState(null);
     const [vehicles, setVehicles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
-
-
-
 
     const handleButtonClick = (vehicles) => {
         setSelectedVehicles(vehicles);

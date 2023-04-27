@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import wars from "../assets/logo.svg";
+import wars from "../assets/general/logo.svg";
 import React from "react";
 
 
