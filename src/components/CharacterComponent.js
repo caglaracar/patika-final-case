@@ -11,7 +11,9 @@ const CharacterComponent = () => {
     // Getting variables and functions from context
     const {handleButtonClick,selectedImg,filteredItems, getInitialData, getMoreData, disableLoadMore, handleSearchTermChange, searchTerm, modalOpen, setModalOpen, isLoading, selectedItem} = useContext(StarwarsContext)
 
+    // Initialize state variables
     const [peopleImg, setPeopleImg] = useState([]);
+
     // Function used to get character images
     const getPeopleImg = async () => {
         const {data} = await axios.get("https://akabab.github.io/starwars-api/api/all.json");
@@ -19,6 +21,7 @@ const CharacterComponent = () => {
             setPeopleImg(data)
         }
     }
+
     // useEffect that runs startup functions while the component is loading
     useEffect(() => {
         getInitialData(getPeople);
@@ -26,7 +29,6 @@ const CharacterComponent = () => {
         // Cleanup function to run when removing the component
         return () => {
             handleSearchTermChange({target: {value: ''}});
-
         }
     }, []);
 

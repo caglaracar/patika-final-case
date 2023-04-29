@@ -11,19 +11,16 @@ const VehiclesCompenent = () => {
 
     // Getting variables and functions from context
     const {filteredItems,getInitialData,getMoreData,handleButtonClick,disableLoadMore,handleSearchTermChange, searchTerm, modalOpen, setModalOpen,isLoading,selectedItem} = useContext(StarwarsContext)
+
     // useEffect that runs startup functions while the component is loading
     useEffect(() => {
         getInitialData(getVehicles);
-
         // Cleanup function to run when removing the component
         return () => handleSearchTermChange({ target: { value: '' } });
-
     }, []);
-    // function used to filter when searching the input field
-    console.log(selectedItem)
+
     return (
         <>
-
             <div className="container mt-5">
                 <div className="row">
                     <motion.div className={"input-style "}>
@@ -82,7 +79,6 @@ const VehiclesCompenent = () => {
                             }}>Close</Button>
 
                         </Modal.Footer>
-
                     </>
                 )}
             </Modal>

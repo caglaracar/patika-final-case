@@ -24,15 +24,11 @@ const photos = [
 // Define the StarwarsContextProvider component
 const StarwarsContextProvider = ({children}) => {
 
-
-
-
-    // Initialize state variables using useState()
+    // Initialize state variables
     const [searchTerm, setSearchTerm] = useState('');
     const [modalOpen, setModalOpen] = useState(false);
     const [totalResults, setTotalResults] = useState(0);
     const [loadedResults, setLoadedResults] = useState(0);
-
     const [selectedItem, setSelectedItem] = useState(null);
     const [item, setItem] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -43,8 +39,8 @@ const StarwarsContextProvider = ({children}) => {
     const handleSearchTermChange = event => {
         setSearchTerm(event.target.value);
     };
-    // function used to filter when searching the input field
 
+    // function used to filter when searching the input field
     const disableLoadMore = loadedResults >= totalResults;
     // Function that will run when the user clicks on a character
     const handleButtonClick = (item, img = null) => {
@@ -54,7 +50,6 @@ const StarwarsContextProvider = ({children}) => {
         }
         setModalOpen(true);
     };
-
 
     // Function that calls API to get all vehicles
     const getMoreData = async (getServiceData) => {
@@ -86,11 +81,13 @@ const StarwarsContextProvider = ({children}) => {
             setIsLoading(false);
         }
     };
-    // Return the StarwarsContext.Provider component with required values
 
+    // function used to filter when searching the input field
     const filteredItems = item.filter(starship =>
         starship.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    // Return the StarwarsContext.Provider component with required values
     return (
 
     <StarwarsContext.Provider value={{filteredItems,photos,selectedImg,setSelectedImg,getInitialData,getMoreData,handleButtonClick,setSelectedItem,selectedItem,isLoading,setIsLoading,disableLoadMore,handleSearchTermChange,modalOpen,setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults,searchTerm}}>

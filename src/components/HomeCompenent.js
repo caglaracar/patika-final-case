@@ -9,9 +9,6 @@ import StarshipIMG from '../assets/home/starship.jpg'
 import VehiclesIMG from '../assets/home/vehicles.png'
 import PlanetsIMG from '../assets/home/planets.jpg'
 import SpeciesIMG from '../assets/home/species.jpg'
-
-
-
 const HomeCompenent = () => {
 
     return (

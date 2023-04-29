@@ -8,14 +8,15 @@ import PlanetIMG from "../assets/home/planets.jpg";
 // Creating Planet component
 
 const PlanetsCompenent = () => {
+
     // Getting variables and functions from context
     const {filteredItems,getInitialData,getMoreData,handleButtonClick,disableLoadMore,handleSearchTermChange, searchTerm, modalOpen, setModalOpen,isLoading,selectedItem} = useContext(StarwarsContext)
     
     // useEffect that runs startup functions while the component is loading
     useEffect(() => {
         getInitialData(getPlanets);
+        // Cleanup function to run when removing the component
         return () => handleSearchTermChange({ target: { value: '' } });
-
     }, []);
 
 
@@ -74,13 +75,11 @@ const PlanetsCompenent = () => {
                             <p><span>Orbital Period:</span> {selectedItem.orbital_period}</p>
                             <p><span>Surface Water</span> {selectedItem.surface_water}</p>
                             <p><span>Rotation Per</span> {selectedItem.rotation_period}</p>
-
                         </Modal.Body>
                         <Modal.Footer>
                             <Button  className="close-button-centered" onClick={() => {
                                 setModalOpen(false)
                             }}>Close</Button>
-
                         </Modal.Footer>
                     </>
                 )}

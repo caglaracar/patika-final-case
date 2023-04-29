@@ -17,12 +17,9 @@ const SpeciesCompenent = () => {
         getInitialData(getSpecies);
         // Cleanup function to run when removing the component
         return () => handleSearchTermChange({ target: { value: '' } });
-
     }, []);
     return (
         <>
-
-
             <div className="container mt-5">
                 <div className="row">
                     <motion.div className={"input-style "}>

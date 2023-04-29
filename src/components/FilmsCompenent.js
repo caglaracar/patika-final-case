@@ -4,12 +4,15 @@ import {getFilms} from "../services/StarwarsService";
 import {Card} from "react-bootstrap";
 import {StarwarsContext} from "../context/Context";
 
-
 // Creating Film component
 const FilmsCompenent = () => {
-    // State variable is defined
+
+    // Getting photos from context
     const {photos}=useContext(StarwarsContext)
+
+    // State variable is defined
     const [filmss, setFilmss] = useState([]);
+
     // Function that calls API to get all Films
     const getAllFilms = async () => {
         const allFilms = await getFilms();
