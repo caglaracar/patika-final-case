@@ -9,50 +9,9 @@ import axios from "axios";
 // Creating character component
 const CharacterComponent = () => {
     // Getting variables and functions from context
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen, totalResults, setTotalResults, loadedResults, setLoadedResults} = useContext(StarwarsContext)
+    const {handleButtonClick,selectedImg,filteredItems, getInitialData, getMoreData, disableLoadMore, handleSearchTermChange, searchTerm, modalOpen, setModalOpen, isLoading, selectedItem} = useContext(StarwarsContext)
 
-    // State variables are defined
-    const [selectedPeople, setSelectedPeople] = useState(null);
-    const [people, setPeople] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
     const [peopleImg, setPeopleImg] = useState([]);
-    const [selectedImg, setSelectedImg] = useState("");
-
-    // Function that will run when the user clicks on a character
-    const handleButtonClick = (people, img) => {
-        setSelectedPeople(people);
-        setSelectedImg(img);
-        setModalOpen(true);
-    };
-    // Function that calls API to get all characters
-    const getAllPeople = async () => {
-        setIsLoading(true);
-        try {
-            const currentPage = Math.ceil(loadedResults / 10);
-            const data = await getPeople(currentPage + 1, 10);
-            setPeople([...people, ...data.results]);
-            setTotalResults(data.count);
-            setLoadedResults(loadedResults + data.results.length);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    // Function used to initially retrieve character data
-    const getInitialPeopleData = async () => {
-        setIsLoading(true);
-        try {
-            const data = await getPeople(1, 10);
-            setPeople(data.results);
-            setTotalResults(data.count);
-            setLoadedResults(data.results.length);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
     // Function used to get character images
     const getPeopleImg = async () => {
         const {data} = await axios.get("https://akabab.github.io/starwars-api/api/all.json");
@@ -62,7 +21,7 @@ const CharacterComponent = () => {
     }
     // useEffect that runs startup functions while the component is loading
     useEffect(() => {
-        getInitialPeopleData();
+        getInitialData(getPeople);
         getPeopleImg();
         // Cleanup function to run when removing the component
         return () => {
@@ -71,13 +30,6 @@ const CharacterComponent = () => {
         }
     }, []);
 
-    // Condition used to disable loading more results
-    const disableLoadMore = loadedResults >= totalResults;
-
-    // function used to filter when searching the input field
-    const filterPeople = people.filter(people =>
-        people.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
     return (
         <>
             <div>
@@ -87,7 +39,7 @@ const CharacterComponent = () => {
                             <motion.input type="text" placeholder="Search People..." value={searchTerm}
                                           onChange={handleSearchTermChange}/>
                         </motion.div>
-                        {filterPeople?.map((people, index) => (
+                        {filteredItems?.map((people, index) => (
                             <div key={people.url} className={"col-md-4 mb-4"}>
                                 <Card className={"card-style-component"}>
                                     <Card.Body onClick={() => {
@@ -113,34 +65,33 @@ const CharacterComponent = () => {
                         ))}
                     </div>
                     <div className="text-center">
-                        <Button variant="primary" onClick={getAllPeople} disabled={disableLoadMore || isLoading}>
+                        <Button variant="primary" onClick={()=>{getMoreData(getPeople)}} disabled={disableLoadMore || isLoading}>
                             {isLoading ? 'Loading...' : 'Load More'}
                         </Button>
                     </div>
                 </div>
             </div>
             <Modal show={modalOpen} centered>
-                {selectedPeople && (
+                {selectedItem && (
                     <>
                         <Modal.Header className="justify-content-center">
-                            <h3>{selectedPeople.name}</h3>
+                            <h3>{selectedItem.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
                             {selectedImg ?
-                                <img className={"card-img-modal"} src={selectedImg} alt={selectedPeople.name}/>
+                                <img className={"card-img-modal"} src={selectedImg} alt={selectedItem.name}/>
                                 : ""
                             }
-                            <p><span>Birth Year:</span> {selectedPeople.birth_year}</p>
-                            <p><span>Eye Color:</span> {selectedPeople.eye_color}</p>
-                            <p><span>Gender:</span> {selectedPeople.gender}</p>
-                            <p><span>Hair Color: </span>{selectedPeople.hair_color}</p>
-                            <p><span>Mass:</span> {selectedPeople.mass}</p>
+                            <p><span>Birth Year:</span> {selectedItem.birth_year}</p>
+                            <p><span>Eye Color:</span> {selectedItem.eye_color}</p>
+                            <p><span>Gender:</span> {selectedItem.gender}</p>
+                            <p><span>Hair Color: </span>{selectedItem.hair_color}</p>
+                            <p><span>Mass:</span> {selectedItem.mass}</p>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button className="close-button-centered" onClick={() => {
                                 setModalOpen(false)
                             }}>Close</Button>
-
                         </Modal.Footer>
                     </>
                 )}

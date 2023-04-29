@@ -9,63 +9,15 @@ import PlanetIMG from "../assets/home/planets.jpg";
 
 const PlanetsCompenent = () => {
     // Getting variables and functions from context
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
-
-    // State variables are defined
-    const [selectedPlanet, setSelectedPlanet] = useState(null);
-    const [planets, setPlanets] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    // Function that will run when the user clicks on a planet
-    const handleButtonClick = (people) => {
-        setSelectedPlanet(people);
-        setModalOpen(true);
-    };
-
-    // Function that calls API to get all planets
-    const getAllPlanets = async () => {
-        setIsLoading(true);
-        try {
-            const currentPage = Math.ceil(loadedResults / 10);
-            const data = await getPlanets(currentPage + 1, 10);
-            setPlanets([...planets, ...data.results]);
-            setTotalResults(data.count);
-            setLoadedResults(loadedResults + data.results.length);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    // Function used to initially retrieve planet data
-    const getInitialPlanetsData = async () => {
-        setIsLoading(true);
-        try {
-            const data = await getPlanets(1, 10);
-            setPlanets(data.results);
-            setTotalResults(data.count);
-            setLoadedResults(data.results.length);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
+    const {filteredItems,getInitialData,getMoreData,handleButtonClick,disableLoadMore,handleSearchTermChange, searchTerm, modalOpen, setModalOpen,isLoading,selectedItem} = useContext(StarwarsContext)
+    
     // useEffect that runs startup functions while the component is loading
     useEffect(() => {
-        getInitialPlanetsData();
+        getInitialData(getPlanets);
         return () => handleSearchTermChange({ target: { value: '' } });
 
     }, []);
 
-    // Condition used to disable loading more results
-    const disableLoadMore = loadedResults >= totalResults;
-
-    // function used to filter when searching the input field
-    const filteredPlanets = planets.filter(planet =>
-        planet.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
 
     return (
         <>
@@ -75,7 +27,7 @@ const PlanetsCompenent = () => {
                             <motion.input type="text" placeholder="Search Planets..." value={searchTerm}
                                           onChange={handleSearchTermChange}/>
                         </motion.div>
-                        {filteredPlanets?.map((planet) => (
+                        {filteredItems?.map((planet) => (
                             <div key={planet.url} className={"col-md-4 mb-4"}>
                                 <Card className={"card-style-component"} >
                                     <Card.Body onClick={() => {
@@ -103,25 +55,25 @@ const PlanetsCompenent = () => {
                         ))}
                     </div>
                     <div className="text-center">
-                        <Button variant="primary" onClick={getAllPlanets} disabled={disableLoadMore || isLoading}>
+                        <Button variant="primary" onClick={()=>{getMoreData(getPlanets)}} disabled={disableLoadMore || isLoading}>
                             {isLoading ? 'Loading...' : 'Load More'}
                         </Button>
                     </div>
                 </div>
             <Modal show={modalOpen} centered>
-                {selectedPlanet && (
+                {selectedItem && (
                     <>
                         <Modal.Header className="justify-content-center">
-                            <h3>{selectedPlanet.name}</h3>
+                            <h3>{selectedItem.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
-                            <img className={"card-img-modal"} src={PlanetIMG} alt={selectedPlanet.name}/>
-                            <p><span>Climate:</span> {selectedPlanet.climate}</p>
-                            <p><span>Diameter:</span> {selectedPlanet.diameter}</p>
-                            <p><span>Gravity</span> {selectedPlanet.gravity}</p>
-                            <p><span>Orbital Period:</span> {selectedPlanet.orbital_period}</p>
-                            <p><span>Surface Water</span> {selectedPlanet.surface_water}</p>
-                            <p><span>Rotation Per</span> {selectedPlanet.rotation_period}</p>
+                            <img className={"card-img-modal"} src={PlanetIMG} alt={selectedItem.name}/>
+                            <p><span>Climate:</span> {selectedItem.climate}</p>
+                            <p><span>Diameter:</span> {selectedItem.diameter}</p>
+                            <p><span>Gravity</span> {selectedItem.gravity}</p>
+                            <p><span>Orbital Period:</span> {selectedItem.orbital_period}</p>
+                            <p><span>Surface Water</span> {selectedItem.surface_water}</p>
+                            <p><span>Rotation Per</span> {selectedItem.rotation_period}</p>
 
                         </Modal.Body>
                         <Modal.Footer>

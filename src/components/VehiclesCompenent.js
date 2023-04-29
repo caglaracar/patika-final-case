@@ -3,71 +3,24 @@ import React, {useContext, useEffect, useState} from 'react';
 import {motion} from "framer-motion";
 import {StarwarsContext} from "../context/Context";
 import {Card, Button, Modal} from "react-bootstrap";
-import {getVehicles} from "../services/StarwarsService";
 import VehiclesIMG from "../assets/home/vehicles.png";
+import {getVehicles} from "../services/StarwarsService";
 
 // Creating vehicles component
 const VehiclesCompenent = () => {
 
     // Getting variables and functions from context
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
-
-    // State variables are defined
-    const [selectedVehicles, setSelectedVehicles] = useState(null);
-    const [vehicles, setVehicles] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    // Function that will run when the user clicks on a character
-    const handleButtonClick = (vehicles) => {
-        setSelectedVehicles(vehicles);
-        setModalOpen(true);
-    };
-
-    // Function that calls API to get all vehicles
-    const getVehiclesData = async () => {
-        setIsLoading(true);
-        try {
-            const currentPage = Math.ceil(loadedResults / 10);
-            const data = await getVehicles(currentPage + 1, 10);
-            setVehicles([...vehicles, ...data.results]);
-            setTotalResults(data.count);
-            setLoadedResults(loadedResults + data.results.length);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    // Function used to initially retrieve character data
-    const getInitialVehiclesData = async () => {
-        setIsLoading(true);
-        try {
-            const data = await getVehicles(1, 10);
-            setVehicles(data.results);
-            setTotalResults(data.count);
-            setLoadedResults(data.results.length);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
+    const {filteredItems,getInitialData,getMoreData,handleButtonClick,disableLoadMore,handleSearchTermChange, searchTerm, modalOpen, setModalOpen,isLoading,selectedItem} = useContext(StarwarsContext)
     // useEffect that runs startup functions while the component is loading
     useEffect(() => {
-        getInitialVehiclesData();
+        getInitialData(getVehicles);
+
+        // Cleanup function to run when removing the component
         return () => handleSearchTermChange({ target: { value: '' } });
 
     }, []);
-
-    // Condition used to disable loading more results
-    const disableLoadMore = loadedResults >= totalResults;
-
     // function used to filter when searching the input field
-    const filteredVehicles = vehicles.filter(vehicles =>
-        vehicles.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    console.log(selectedItem)
     return (
         <>
 
@@ -77,13 +30,13 @@ const VehiclesCompenent = () => {
                         <motion.input type="text" placeholder="Search vehicles..." value={searchTerm}
                                       onChange={handleSearchTermChange}/>
                     </motion.div>
-                    {filteredVehicles?.map((vehicles) => (
-                        <div key={vehicles.url} className={"col-md-4 mb-4"}>
+                    {filteredItems?.map((vehicle) => (
+                        <div key={vehicle.url} className={"col-md-4 mb-4"}>
                             <Card className={"card-style-component"}>
                                 <Card.Body onClick={() => {
-                                    handleButtonClick(vehicles)
+                                    handleButtonClick(vehicle)
                                 }}>
-                                    <Card.Title tag="h5" className="card-title-fixed">{vehicles.name}</Card.Title>
+                                    <Card.Title tag="h5" className="card-title-fixed">{vehicle.name}</Card.Title>
 
                                     <Card.Img
                                         className={"card-img card-img-fixed"}
@@ -91,10 +44,10 @@ const VehiclesCompenent = () => {
                                         src={VehiclesIMG}
                                     />
                                     <Card.Subtitle tag="h6" className="mb-4 text-muted">
-                                       <span>Model :</span> {vehicles.model}
+                                       <span>Model :</span> {vehicle.model}
                                     </Card.Subtitle>
                                     <Card.Subtitle tag="h6" className="mb-4 text-muted">
-                                        <span>Hyperdrive Rating :</span> {vehicles.hyperdrive_rating}
+                                        <span>Max Atmosphering Speed:</span> {vehicle.max_atmosphering_speed}
                                     </Card.Subtitle>
                                 </Card.Body>
                             </Card>
@@ -102,26 +55,26 @@ const VehiclesCompenent = () => {
                     ))}
                 </div>
                 <div className="text-center">
-                    <Button className={"load-more"} variant="primary" onClick={getVehiclesData} disabled={disableLoadMore || isLoading}>
+                    <Button className={"load-more"} variant="primary" onClick={()=>{getMoreData(getVehicles)}} disabled={disableLoadMore || isLoading}>
                         {isLoading ? 'Loading...' : 'Load More'}
                     </Button>
                 </div>
             </div>
 
             <Modal show={modalOpen} centered>
-                {selectedVehicles && (
+                {selectedItem && (
                     <>
                         <Modal.Header className="justify-content-center">
-                            <h3>{selectedVehicles.name}</h3>
+                            <h3>{selectedItem.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
 
-                            <img  className={"card-img-modal"}  src={VehiclesIMG} alt={selectedVehicles.name}/>
-                            <p><span>Hyperdrive Rating:</span> {selectedVehicles.hyperdrive_rating}</p>
-                            <p><span>Passengers:</span> {selectedVehicles.passengers}</p>
-                            <p><span>Max Atmosphering Speed:</span> {selectedVehicles.max_atmosphering_speed}</p>
-                            <p><span>Manufacturer:</span> {selectedVehicles?.manufacturer}</p>
-                            <p><span>Cargo Capacity:</span> {selectedVehicles.cargo_capacity}</p>
+                            <img  className={"card-img-modal"}  src={VehiclesIMG} alt={selectedItem.name}/>
+                            <p><span>Passengers:</span> {selectedItem.passengers}</p>
+                            <p><span>Max Atmosphering Speed:</span> {selectedItem.max_atmosphering_speed}</p>
+                            <p><span>Manufacturer:</span> {selectedItem.manufacturer}</p>
+                            <p><span>Cargo Capacity:</span> {selectedItem.cargo_capacity}</p>
+                            <p><span>Crew:</span> {selectedItem.crew}</p>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button  className="close-button-centered" onClick={() => {

@@ -1,27 +1,14 @@
 // Import required dependencies and hooks
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {getFilms} from "../services/StarwarsService";
 import {Card} from "react-bootstrap";
+import {StarwarsContext} from "../context/Context";
 
-import FilmsIMG1 from "../assets/films/starwars1.jpg";
-import FilmsIMG2 from "../assets/films/starwars2.jpg";
-import FilmsIMG3 from "../assets/films/starwars3.jpg";
-import FilmsIMG4 from "../assets/films/starwars4.jpg";
-import FilmsIMG5 from "../assets/films/starwars5.jpg";
-import FilmsIMG6 from "../assets/films/starwars6.jpg";
 
-const photos = [
-    {id: 1, src: `${FilmsIMG1}`},
-    {id: 2, src: `${FilmsIMG2}`},
-    {id: 3, src: `${FilmsIMG3}`},
-    {id: 4, src: `${FilmsIMG4}`},
-    {id: 5, src: `${FilmsIMG5}`},
-    {id: 6, src: `${FilmsIMG6}`}
-];
 // Creating Film component
 const FilmsCompenent = () => {
     // State variable is defined
-
+    const {photos}=useContext(StarwarsContext)
     const [filmss, setFilmss] = useState([]);
     // Function that calls API to get all Films
     const getAllFilms = async () => {

@@ -2,7 +2,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
-import {getSpecies} from "../services/StarwarsService";
+import {getSpecies, getVehicles} from "../services/StarwarsService";
 import {Card, Button, Modal} from "react-bootstrap";
 import SpeciesIMG from '../assets/home/species.jpg'
 
@@ -10,66 +10,15 @@ import SpeciesIMG from '../assets/home/species.jpg'
 const SpeciesCompenent = () => {
 
     // Getting variables and functions from context
-    const {handleSearchTermChange, searchTerm, modalOpen, setModalOpen,totalResults,setTotalResults,loadedResults,setLoadedResults} = useContext(StarwarsContext)
+    const {filteredItems,getInitialData,getMoreData,handleButtonClick,disableLoadMore,handleSearchTermChange, searchTerm, modalOpen, setModalOpen,isLoading,selectedItem} = useContext(StarwarsContext)
 
-    // State variables are defined
-    const [selectedSpecies, setSelectedSpecies] = useState(null);
-    const [species, setSpecies] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-    // Function that will run when the user clicks on a species
-    const handleButtonClick = (species) => {
-        setSelectedSpecies(species);
-        setModalOpen(true);
-    };
-
-    // Function that calls API to get all species
-    const getAllSpecies = async () => {
-        setIsLoading(true);
-        try {
-            const currentPage = Math.ceil(loadedResults / 10);
-            const data = await getSpecies(currentPage + 1, 10);
-            setSpecies([...species, ...data.results]);
-            setTotalResults(data.count);
-            setLoadedResults(loadedResults + data.results.length);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    // Function used to initially retrieve species data
-    const getInitialSpeciesData = async () => {
-        setIsLoading(true);
-        try {
-            const data = await getSpecies(1, 10);
-            setSpecies(data.results);
-            setTotalResults(data.count);
-            setLoadedResults(data.results.length);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
     // useEffect that runs startup functions while the component is loading
     useEffect(() => {
-        getInitialSpeciesData();
-
+        getInitialData(getSpecies);
         // Cleanup function to run when removing the component
         return () => handleSearchTermChange({ target: { value: '' } });
 
     }, []);
-
-    // Condition used to disable loading more results
-    const disableLoadMore = loadedResults >= totalResults;
-
-    // function used to filter when searching the input field
-    const filteredSpecies = species.filter(species =>
-        species.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
     return (
         <>
 
@@ -80,7 +29,7 @@ const SpeciesCompenent = () => {
                         <motion.input type="text" placeholder="Search Species..." value={searchTerm}
                                       onChange={handleSearchTermChange}/>
                     </motion.div>
-                    {filteredSpecies?.map((specie) => (
+                    {filteredItems?.map((specie) => (
                         <div key={specie.url} className={"col-md-4 mb-4"}>
                             <Card className={"card-style-component"}>
                                 <Card.Body onClick={() => {
@@ -106,7 +55,7 @@ const SpeciesCompenent = () => {
                     ))}
                 </div>
                 <div className="text-center">
-                    <Button variant="primary" onClick={getAllSpecies} disabled={disableLoadMore || isLoading}>
+                    <Button className={"load-more"} variant="primary" onClick={()=>{getMoreData(getVehicles)}} disabled={disableLoadMore || isLoading}>
                         {isLoading ? 'Loading...' : 'Load More'}
                     </Button>
                 </div>
@@ -114,18 +63,18 @@ const SpeciesCompenent = () => {
             </div>
 
             <Modal show={modalOpen} centered>
-                {selectedSpecies && (
+                {selectedItem && (
                     <>
                         <Modal.Header className="justify-content-center">
-                            <h3>{selectedSpecies.name}</h3>
+                            <h3>{selectedItem.name}</h3>
                         </Modal.Header>
                         <Modal.Body>
-                            <img className={"card-img-modal"} src={SpeciesIMG} alt={selectedSpecies.name}/>
-                            <p><span>Average Height:</span> {selectedSpecies.average_height}</p>
-                            <p><span>Average Lifespan:</span> {selectedSpecies.average_lifespan}</p>
-                            <p><span>Classification:</span> {selectedSpecies.classification}</p>
-                            <p><span>Designation:</span> {selectedSpecies.designation}</p>
-                            <p><span>Language:</span> {selectedSpecies.language}</p>
+                            <img className={"card-img-modal"} src={SpeciesIMG} alt={selectedItem.name}/>
+                            <p><span>Average Height:</span> {selectedItem.average_height}</p>
+                            <p><span>Average Lifespan:</span> {selectedItem.average_lifespan}</p>
+                            <p><span>Classification:</span> {selectedItem.classification}</p>
+                            <p><span>Designation:</span> {selectedItem.designation}</p>
+                            <p><span>Language:</span> {selectedItem.language}</p>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button  className="close-button-centered" onClick={() => {

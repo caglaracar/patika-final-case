@@ -239,11 +239,7 @@ p > span {
     font-weight: bold;
 }
 
-/*
-Mobil-web header-
- */
-/*Header-Navbar */
-/*Header-Navbar */
+
 header {
     display: flex;
     justify-content: space-between;
