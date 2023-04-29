@@ -40,7 +40,7 @@ const VehiclesCompenent = () => {
                                         variant="top"
                                         src={VehiclesIMG}
                                     />
-                                    <Card.Subtitle tag="h6" className="mb-4 text-muted">
+                                    <Card.Subtitle tag="h6" className="card-model text-muted">
                                        <span>Model :</span> {vehicle.model}
                                     </Card.Subtitle>
                                     <Card.Subtitle tag="h6" className="mb-4 text-muted">

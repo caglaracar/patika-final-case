@@ -30,6 +30,18 @@ code {
     justify-content: center;
 
 }
+.text-muted {
+    margin-bottom: 2rem;
+}
+
+.card-model {
+    min-height: 35px;
+    max-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 
 .text-center {
     margin: 1.5rem;
