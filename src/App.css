@@ -242,9 +242,13 @@ Modal
 .card-img-modal {
     height: 200px;
     object-fit: cover;
-    margin-left: 5rem;
-    margin-bottom: 2rem
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+    margin-top: 0.5rem;
 }
+
 
 p > span {
     color: #ef5268;

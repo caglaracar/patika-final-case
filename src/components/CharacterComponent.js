@@ -21,6 +21,11 @@ const CharacterComponent = () => {
             setPeopleImg(data)
         }
     }
+   //the function that ensures that the photos do not change when a call is made
+    const getFilteredPeopleImg = (person) => {
+        const foundPersonImg = peopleImg.find(img => img.name === person.name);
+        return foundPersonImg ? foundPersonImg.image : null;
+    };
 
     // useEffect that runs startup functions while the component is loading
     useEffect(() => {
@@ -45,14 +50,14 @@ const CharacterComponent = () => {
                             <div key={people.url} className={"col-md-4 mb-4"}>
                                 <Card className={"card-style-component"}>
                                     <Card.Body onClick={() => {
-                                        handleButtonClick(people, peopleImg[index]?.image)
+                                        handleButtonClick(people, getFilteredPeopleImg(people))
                                     }}>
                                         <Card.Title tag="h5" className="card-title-fixed">{people.name}</Card.Title>
 
                                         <Card.Img
                                             className={"card-img card-img-fixed"}
                                             variant="top"
-                                            src={peopleImg[index]?.image}
+                                            src={getFilteredPeopleImg(people)}
                                         />
                                         <Card.Subtitle tag="h6" className="mb-4 text-muted">
                                             <span>Birth Year :</span>{people.birth_year}

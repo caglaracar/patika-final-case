@@ -18,6 +18,13 @@ const StarshipCard = () => {
 
     }, []);
 
+    //the function that ensures that the photos do not change when a call is made
+    const getFilteredStarshipImg = (starship) => {
+        const foundStarshipImg = starshipIMGs.find(img => img.name === starship.name);
+        return foundStarshipImg ? foundStarshipImg.img : null;
+    };
+
+
     return (
         <>
             <div className="container mt-5">
@@ -30,11 +37,11 @@ const StarshipCard = () => {
                         <div key={starship.url} className={"col-md-4 mb-4"}>
                             <Card className={"card-style-component"}>
                                 <Card.Body onClick={() => {
-                                    handleButtonClick(starship, starshipIMGs[index].img)
+                                    handleButtonClick(starship, getFilteredStarshipImg(starship))
                                 }}>
                                     <Card.Title tag="h5" className="card-title-fixed">{starship.name}</Card.Title>
                                     <Card.Img className={"card-img card-img-fixed"} variant="top"
-                                              src={starshipIMGs[index].img}/>
+                                              src={getFilteredStarshipImg(starship)}/>
                                     <Card.Subtitle tag="h6" className="card-model text-muted">
                                         <span>Model :</span> {starship.model}
                                     </Card.Subtitle>

@@ -6,7 +6,6 @@ import FilmsIMG3 from "../assets/films/starwars3.jpg";
 import FilmsIMG4 from "../assets/films/starwars4.jpg";
 import FilmsIMG5 from "../assets/films/starwars5.jpg";
 import FilmsIMG6 from "../assets/films/starwars6.jpg";
-import {getVehicles} from "../services/StarwarsService";
 
 // Create the StarwarsContext using createContext() from React
 export const StarwarsContext=createContext()
@@ -35,10 +34,7 @@ const StarwarsContextProvider = ({children}) => {
     const [selectedImg, setSelectedImg] = useState("");
 
 
-    // Define a function to handle changes in the search term input field
-    const handleSearchTermChange = event => {
-        setSearchTerm(event.target.value);
-    };
+
 
     // function used to filter when searching the input field
     const disableLoadMore = loadedResults >= totalResults;
@@ -82,10 +78,15 @@ const StarwarsContextProvider = ({children}) => {
         }
     };
 
+    // Define a function to handle changes in the search term input field
+    const handleSearchTermChange = event => {
+        setSearchTerm(event.target.value);
+    };
     // function used to filter when searching the input field
     const filteredItems = item.filter(starship =>
         starship.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
 
     // Return the StarwarsContext.Provider component with required values
     return (
