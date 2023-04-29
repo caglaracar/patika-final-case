@@ -1,5 +1,5 @@
 // Import required dependencies and hooks
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StarwarsContext} from "../context/Context";
 import {motion} from "framer-motion";
 import { getPlanets} from "../services/StarwarsService";

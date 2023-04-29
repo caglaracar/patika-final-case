@@ -52,7 +52,7 @@ const SpeciesCompenent = () => {
                     ))}
                 </div>
                 <div className="text-center">
-                    <Button className={"load-more"} variant="primary" onClick={()=>{getMoreData(getVehicles)}} disabled={disableLoadMore || isLoading}>
+                    <Button className={"load-more"} variant="primary" onClick={()=>{getMoreData(getSpecies)}} disabled={disableLoadMore || isLoading}>
                         {isLoading ? 'Loading...' : 'Load More'}
                     </Button>
                 </div>

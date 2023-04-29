@@ -33,7 +33,7 @@ const StarshipCard = () => {
                         <motion.input type="text" placeholder="Search starships..." value={searchTerm}
                                       onChange={handleSearchTermChange}/>
                     </motion.div>
-                    {filteredItems?.map((starship, index) => (
+                    {filteredItems?.map((starship) => (
                         <div key={starship.url} className={"col-md-4 mb-4"}>
                             <Card className={"card-style-component"}>
                                 <Card.Body onClick={() => {
